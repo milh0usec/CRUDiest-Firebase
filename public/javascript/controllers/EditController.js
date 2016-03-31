@@ -1,15 +1,15 @@
-app.controller('EditController', ["$scope", '$http', '$routeParams', '$location', function($scope, $http, $routeParams, $location){
+app.controller('EditController', ["$scope", '$http', '$routeParams', '$location', '$firebaseArray', function($scope, $http, $routeParams, $location, $firebaseArray){
   console.log("Edit controller");
-  $http.get('https://pure-wave-92261.herokuapp.com/movies/movies/' + $routeParams.id + '/edit/').then(function(response) { // EDIT
-    $scope.movie = response.data;
-  }, function(error) {
-    console.log("Error, no data returned.");
-    console.log(error);
+  var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+  $scope.movies = $firebaseArray(ref);
+  $scope.movies.$loaded()
+  .then(function(){
+    $scope.movie = $scope.movies.$getRecord($routeParams.id);
   });
 
   $scope.updateMovie = function(movie) {
     console.log("Updating movie.");
-    var movie = {
+    movie = {
       movieActors: $scope.movie.movieActors,
       movieAwards: $scope.movie.movieAwards,
       movieCountry: $scope.movie.movieCountry,
@@ -30,25 +30,20 @@ app.controller('EditController', ["$scope", '$http', '$routeParams', '$location'
       movieLikes: 0,
       movieTrivia: $scope.movie.movieTrivia,
       comments: $scope.movie.comments
-    }
-    console.log(movie);
-    $http.put('https://pure-wave-92261.herokuapp.com/movies/movies/' + $routeParams.id, movie).then(function(response) { // UPDATE
-      $location.path( "/movies" );
+    };
+    // $scope.movie = movie;
+    console.log($scope.movie);
+    // NOT FUNCTIONAL
+    $scope.movies.$save(movie).then(function() {
       console.log("Movie updated.");
-    }, function(error) {
-      console.log("Error, no data returned.");
-      console.log(error);
+      $location.path( "/movies" );
     });
   };
 
   $scope.deleteMovie = function(movie) { // DESTROY
-    console.log("Deleting movie.");
-    $http.delete('https://pure-wave-92261.herokuapp.com/movies/movies/' + movie._id).then(function(response){
+    $scope.movies.$remove(movie).then(function() {
       console.log("Movie deleted.");
       $location.path( "/movies" );
-    }, function(error) {
-      console.log("Failed to reload page.");
-      console.log(error);
     });
   };
 

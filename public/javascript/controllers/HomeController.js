@@ -1,15 +1,12 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$location', function($scope, $http, $route, $location) {
+app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', function($scope, $http, $route, $location, $firebaseArray) {
   console.log("Home controller.");
   $scope.loading = true;
-  $http.get('https://pure-wave-92261.herokuapp.com/movies/movies/').then(function(response) { // INDEX
-    $scope.movies = response.data;
-    $scope.order = '_id';
-    $scope.reverse = true;
-    $scope.loading = false;
-  }, function(error) {
-    console.log("Error, no data returned.");
-    console.log(error);
-  });
+
+  var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+  $scope.movies = $firebaseArray(ref);
+  $scope.order = '$id';
+  $scope.reverse = true;
+  $scope.loading = false;
 
   $scope.getLocation = function(val) {
     return $http.get('//www.omdbapi.com/?s=' + val)
@@ -45,25 +42,11 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', func
         movieImdbVotes: response.data.imdbVotes,
         movieLikes: 0
       };
-       // reset orderBy so that new movie appears in upper left
-      $scope.order = '_id'
+      // reset orderBy so that new movie appears in upper left
+      $scope.order = '$id'
       $scope.reverse = true;
-      $scope.movies.push(movie);
+      $scope.movies.$add(movie);
       $scope.loading = false;
-      $http.post('https://pure-wave-92261.herokuapp.com/movies/movies/', movie).then(function(response) { // NEW
-        console.log("Movie added.");
-
-        // This HTTP GET request is the slowest part of the web app. Without it the user has to click the new movie twice to get to the SHOW view. Also if multiple users are using the web app simultaneously the front end and back end will become out of sync.
-        $http.get('https://pure-wave-92261.herokuapp.com/movies/movies/').then(function(response) { // INDEX
-          $scope.movies = response.data;
-        }, function(Error) {
-          console.log("Error, no data returned.");
-          console.log(error);
-        });
-      }, function(error) {
-        console.log("Error, no movie added.");
-        console.log(error);
-      });
     });
   };
 

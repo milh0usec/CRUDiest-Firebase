@@ -1,5 +1,5 @@
 {
-  "firebase": "crudiest-movies",
+  "firebase": "crudiest-firebase",
   "public": "public",
   "ignore": [
     "firebase.json",

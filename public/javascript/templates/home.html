@@ -63,10 +63,10 @@
   <!-- orderBy buttons row, mobile screens -->
   <div class="row visible-xs-block">
     <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '_id'; reverse = true">Order By Recently Added</button>
+      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = true">Order By Recently Added</button>
     </div>
     <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '_id'; reverse = false">Order By Least Recently Added</button>
+      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = false">Order By Least Recently Added</button>
     </div>
     <div class="col-sm-2">
       <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = false">Order By Worst First</button>
@@ -85,10 +85,10 @@
   <!-- orderBy buttons row, large screens -->
   <div class="row visible-sm-block visible-md-block visible-lg-block">
     <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '_id'; reverse = true">Recent</button>
+      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = true">Recent</button>
     </div>
     <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '_id'; reverse = false">Oldest</button>
+      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = false">Oldest</button>
     </div>
     <div class="col-sm-2">
       <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = false">Worst</button>
@@ -107,25 +107,25 @@
   <!-- Responsive views -->
   <div class="row visible-xs-block">
     <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie._id}}"><img class="extraSmallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+      <a ng-href="/#/movies/{{movie.$id}}"><img class="extraSmallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
     </div>
   </div>
 
   <div class="row visible-sm-block">
     <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie._id}}"><img class="smallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+      <a ng-href="/#/movies/{{movie.$id}}"><img class="smallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
     </div>
   </div>
 
   <div class="row visible-md-block">
     <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie._id}}"><img class="mediumMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+      <a ng-href="/#/movies/{{movie.$id}}"><img class="mediumMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
     </div>
   </div>
 
   <div class="row visible-lg-block">
     <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie._id}}"><img class="largeMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+      <a ng-href="/#/movies/{{movie.$id}}"><img class="largeMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
     </div>
   </div>
 
