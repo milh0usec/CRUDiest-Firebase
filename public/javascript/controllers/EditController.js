@@ -10,10 +10,7 @@ app.controller('EditController', ["$scope", '$http', '$routeParams', '$location'
 
   $scope.updateMovie = function() {
     console.log("Updating movie.");
-    console.log($scope.movie);
-    console.log($scope.movies.$getRecord($routeParams.id));
-    $scope.movies.$save($routeParams.id).then(function(reference) {
-      console.log(reference);
+    $scope.movies.$save($routeParams.id).then(function() {
       console.log("Movie updated.");
       $location.path( "/movies" );
     });
