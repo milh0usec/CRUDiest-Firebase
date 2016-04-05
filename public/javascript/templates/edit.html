@@ -4,104 +4,89 @@
 
   <div class="form-group">
     <label for="editTitle" class="col-sm-2 control-label">Edit Title: </label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="movies.$save(movie)" value={{movie.movieTitle}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="movies.$save(movie)"></label>
     </div>
     <div class="col-sm-2">
       <p ng-show="watchTitle">Movie Title Saved!</p>
     </div>
-    <div class="col-sm-2">
-      <p ng-show="watchAll">All Saved!</p>
-    </div>
   </div>
-
-  <!-- <div class="form-group">
-    <label for="editTitle" class="col-sm-2 control-label">Edit Title: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" value={{movie.movieTitle}}></label>
-    </div>
-  </div> -->
 
   <div class="form-group">
     <label for="editPoster" class="col-sm-2 control-label">Edit Poster: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editPoster" ng-model="movie.moviePoster"></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editPoster" ng-model="movie.moviePoster" ng-change="movies.$save(movie)"></label>
+    </div>
+    <div class="col-sm-2">
+      <p ng-show="watchPoster">Movie Poster Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="editPlot" class="col-sm-2 control-label">Edit Plot: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editPlot" ng-model="movie.moviePlot" value={{movie.moviePlot}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editPlot" ng-model="movie.moviePlot" ng-change="movies.$save(movie)"></label>
+    </div>
+    <div class="col-sm-2">
+      <p ng-show="watchPlot">Movie Plot Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="editTrivia" class="col-sm-2 control-label">Edit Trivia: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editTrivia" ng-model="movie.movieTrivia" value={{movie.movieTrivia}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editTrivia" ng-model="movie.movieTrivia" ng-change="movies.$save(movie)"></label>
+    </div>
+    <div class="col-sm-2">
+      <p ng-show="watchTrivia">Movie Trivia Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="editDirector" class="col-sm-2 control-label">Edit Director: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editDirector" ng-model="movie.movieDirector" ng-change="movies.$save(movie)" value={{movie.movieDirector}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editDirector" ng-model="movie.movieDirector" ng-change="movies.$save(movie)" ng-change="movies.$save(movie)"></label>
+    </div>
+    <div class="col-sm-2">
+      <p ng-show="watchDirector">Movie Director Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="editWriter" class="col-sm-2 control-label">Edit Writer: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editWriter" ng-model="movie.movieWriter" value={{movie.movieWriter}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editWriter" ng-model="movie.movieWriter" ng-change="movies.$save(movie)"></label>
+    </div>
+    <div class="col-sm-2">
+      <p ng-show="watchWriter">Movie Writer Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="editActors" class="col-sm-2 control-label">Edit Actors: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editActors" ng-model="movie.movieActors" value={{movie.movieActors}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editActors" ng-model="movie.movieActors" ng-change="movies.$save(movie)"></label>
+    </div>
+    <div class="col-sm-2">
+      <p ng-show="watchActors">Movie Actors Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="editYear" class="col-sm-2 control-label">Edit Year: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="editYear" ng-model="movie.movieYear" value={{movie.movieYear}}></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="editYear" ng-model="movie.movieYear" ng-change="movies.$save(movie)"></label>
     </div>
-  </div>
-
-  <div class="form-group">
-    <label for="updateMovie" class="col-sm-2 control-label"></label>
-    <div class="col-sm-10">
-      <input type="submit" class="form-control btn btn-primary" value="Update Movie"></input>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="updateMovie" class="col-sm-2 control-label"></label>
-    <div class="col-sm-10">
-      <button ng-click="updateMovie(movie)" class="form-control btn btn-danger">Update Movie</button>
+    <div class="col-sm-2">
+      <p ng-show="watchYear">Movie Year Saved!</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="deleteMovie" class="col-sm-2 control-label"></label>
-    <div class="col-sm-10">
+    <div class="col-sm-8">
       <button ng-click="deleteMovie(movie)" class="form-control btn btn-danger">Delete Movie</button>
     </div>
   </div>
 
 </form>
-
-<div>
-  <script type="text/ng-template" id="alert.html">
-    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
-      <div ng-transclude></div>
-    </div>
-  </script>
-
-  <!-- <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert> -->
-  <uib-alert ng-show="showWatch" template-url="alert.html">A happy alert!</uib-alert>
-  <!-- <button type="button" class='btn btn-default' ng-click="addAlert()">Add Alert</button> -->
-</div>
