@@ -24,35 +24,59 @@ app.controller('EditController', ["$scope", '$routeParams', '$location', '$fireb
     $scope.movies.$watch(function(event) { // Watch the array of all movies
 
       $scope.movieTitleObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchTitle = true; // Show modal in view
+        $scope.watchTitle = true; // Show message
+        setTimeout(function(){
+          $scope.watchTitle = false; // Hide message
+        }, 37); // Up to 36ms this function works as expected. At 37ms or longer the message shows until the user edits another field.
       });
 
-      $scope.moviePosterObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchPoster = true; // Show modal in view
+      $scope.moviePosterObject.$watch(function(event) {
+        $scope.watchPoster = true;
+        setTimeout(function(){
+          $scope.watchPoster = false;
+        }, 37);
       });
 
-      $scope.moviePlotObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchPlot = true; // Show modal in view
+      $scope.moviePlotObject.$watch(function(event) {
+        $scope.watchPlot = true;
+        setTimeout(function(){
+          $scope.watchPlot = false;
+        }, 37);
       });
 
-      $scope.movieTriviaObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchTrivia = true; // Show modal in view
+      $scope.movieTriviaObject.$watch(function(event) {
+        $scope.watchTrivia = true;
+        setTimeout(function(){
+          $scope.watchTrivia = false;
+        }, 37);
       });
 
-      $scope.movieDirectorObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchDirector = true; // Show modal in view
+      $scope.movieDirectorObject.$watch(function(event) {
+        $scope.watchDirector = true;
+        setTimeout(function(){
+          $scope.watchDirector = false;
+        }, 37);
       });
 
-      $scope.movieWriterObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchWriter = true; // Show modal in view
+      $scope.movieWriterObject.$watch(function(event) {
+        $scope.watchWriter = true;
+        setTimeout(function(){
+          $scope.watchWriter = false;
+        }, 37);
       });
 
-      $scope.movieActorsObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchActors = true; // Show modal in view
+      $scope.movieActorsObject.$watch(function(event) {
+        $scope.watchActors = true;
+        setTimeout(function(){
+          $scope.watchActors = false;
+        }, 37);
       });
 
-      $scope.movieYearObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchYear = true; // Show modal in view
+      $scope.movieYearObject.$watch(function(event) {
+        $scope.watchYear = true;
+        setTimeout(function(){
+          $scope.watchYear = false;
+        }, 37);
       });
 
     });
