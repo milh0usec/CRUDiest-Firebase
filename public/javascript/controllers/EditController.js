@@ -1,13 +1,15 @@
-app.controller('EditController', ["$scope", '$routeParams', '$location', '$firebaseArray', '$firebaseObject', function($scope, $routeParams, $location, $firebaseArray, $firebaseObject){
+app.controller('EditController', ["$scope", '$routeParams', '$location', '$firebaseArray', '$firebaseObject', '$timeout', function($scope, $routeParams, $location, $firebaseArray, $firebaseObject, $timeout){
   console.log("Edit controller.");
-  $scope.watchTitle = false; // Initialize value
-  $scope.watchPoster = false; // Initialize value
-  $scope.watchPlot = false; // Initialize value
-  $scope.watchTrivia = false; // Initialize value
-  $scope.watchDirector = false; // Initialize value
-  $scope.watchWriter = false; // Initialize value
-  $scope.watchActors = false; // Initialize value
-  $scope.watchYear = false; // Initialize value
+  $scope.watch = { // Initialize values
+    title: false,
+    poster: false,
+    plot: false,
+    trivia: false,
+    director: false,
+    writer: false,
+    actors: false,
+    year: false
+  };
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/"); // Get all movies from the remote database
   $scope.movies = $firebaseArray(ref); // Put movies onto local $scope
   $scope.movies.$loaded() // Wait until movies downloaded
@@ -24,59 +26,59 @@ app.controller('EditController', ["$scope", '$routeParams', '$location', '$fireb
     $scope.movies.$watch(function(event) { // Watch the array of all movies
 
       $scope.movieTitleObject.$watch(function(event) { // Watch one property of one movie
-        $scope.watchTitle = true; // Show message
-        setTimeout(function(){
-          $scope.watchTitle = false; // Hide message
-        }, 37); // Up to 36ms this function works as expected. At 37ms or longer the message shows until the user edits another field.
+        $scope.watch.title = true; // Show message
+        $timeout(function() {
+          $scope.watch.title = false; // Hide message
+        }, 9999);
       });
 
       $scope.moviePosterObject.$watch(function(event) {
-        $scope.watchPoster = true;
-        setTimeout(function(){
-          $scope.watchPoster = false;
-        }, 37);
+        $scope.watch.poster = true;
+        $timeout(function() {
+          $scope.watch.poster = false;
+        }, 9999);
       });
 
       $scope.moviePlotObject.$watch(function(event) {
-        $scope.watchPlot = true;
-        setTimeout(function(){
-          $scope.watchPlot = false;
-        }, 37);
+        $scope.watch.plot = true;
+        $timeout(function() {
+          $scope.watch.plot = false;
+        }, 9999);
       });
 
       $scope.movieTriviaObject.$watch(function(event) {
-        $scope.watchTrivia = true;
-        setTimeout(function(){
-          $scope.watchTrivia = false;
-        }, 37);
+        $scope.watch.trivia = true;
+        $timeout(function() {
+          $scope.watch.trivia = false;
+        }, 9999);
       });
 
       $scope.movieDirectorObject.$watch(function(event) {
-        $scope.watchDirector = true;
-        setTimeout(function(){
-          $scope.watchDirector = false;
-        }, 37);
+        $scope.watch.director = true;
+        $timeout(function() {
+          $scope.watch.director = false;
+        }, 9999);
       });
 
       $scope.movieWriterObject.$watch(function(event) {
-        $scope.watchWriter = true;
-        setTimeout(function(){
-          $scope.watchWriter = false;
-        }, 37);
+        $scope.watch.writer = true;
+        $timeout(function() {
+          $scope.watch.writer = false;
+        }, 9999);
       });
 
       $scope.movieActorsObject.$watch(function(event) {
-        $scope.watchActors = true;
-        setTimeout(function(){
-          $scope.watchActors = false;
-        }, 37);
+        $scope.watch.actors = true;
+        $timeout(function() {
+          $scope.watch.actors = false;
+        }, 9999);
       });
 
       $scope.movieYearObject.$watch(function(event) {
-        $scope.watchYear = true;
-        setTimeout(function(){
-          $scope.watchYear = false;
-        }, 37);
+        $scope.watch.year = true;
+        $timeout(function() {
+          $scope.watch.year = false;
+        }, 9999);
       });
 
     });
