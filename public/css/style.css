@@ -86,7 +86,12 @@ h1 {
   font-size: larger;
 }
 
-.well-sm {
+.saved {
+  padding-top: 3px
+  color: green;
+}
+
+.well-sm, .saved {
   -webkit-animation: smooth 10s ease-in;
   -moz-animation: smooth 10s ease-in;
   -o-animation: smooth 10s ease-in;
