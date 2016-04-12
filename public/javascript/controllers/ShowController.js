@@ -24,7 +24,11 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   $scope.movies = $firebaseArray(ref);
   $scope.movies.$loaded()
   .then(function(){
-    $scope.movie = $scope.movies.$getRecord($routeParams.id);
+    // $scope.movie = $scope.movies.$getRecord($routeParams.id);
+    $scope.movie = $firebaseObject(ref.child($routeParams.id));
+    console.log($scope.movie);
+
+    $scope.movie.movieLikes = $firebaseObject(ref.child($routeParams.id).child('movieLikes'));
 
     $scope.movieTitleObject = $firebaseObject(ref.child($routeParams.id).child('movieTitle')); // Make the movieTitle property into a $firebaseObject
     $scope.moviePosterObject = $firebaseObject(ref.child($routeParams.id).child('moviePoster'));
@@ -176,7 +180,9 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     movie.newComment.commentText = null; // needed to prevent autofilling fields
     movie.comments = comments; // saves new comment locally
     console.log($scope.movie);
-    $scope.movies.$save(movie).then(function() {
+    console.log($scope.movie.comments);
+    $scope.movie.$save().then(function() {
+    // $scope.movies.$save(movie).then(function() {
       console.log("Comment added!");
     }, function(error) {
       console.log("Error, comment not added.");
@@ -199,7 +205,9 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   $scope.upLike = function(movie) {
     movie.movieLikes += 1;
     console.log(movie);
-    $scope.movies.$save(movie).then(function() {
+    console.log($scope.movie.movieLikes);
+    $scope.movie.$save().then(function() {
+    // $scope.movies.$save(movie).then(function() {
       console.log("Upliked!");
     }, function(error) {
       console.log("Error, movie not upliked.");

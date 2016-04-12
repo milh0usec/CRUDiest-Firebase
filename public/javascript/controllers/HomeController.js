@@ -1,8 +1,9 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', function($scope, $http, $route, $location, $firebaseArray) {
+app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth) {
   console.log("Home controller.");
   $scope.loading = true;
 
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+  var auth = $firebaseAuth(ref);
   $scope.movies = $firebaseArray(ref);
   $scope.order = '$id';
   $scope.reverse = true;
@@ -47,6 +48,19 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
       $scope.reverse = true;
       $scope.movies.$add(movie);
       $scope.loading = false;
+    });
+  };
+
+  $scope.login = function() {
+    $scope.authData = null;
+    $scope.error = null;
+
+    auth.$authAnonymously().then(function(authData) {
+      $scope.authData = authData;
+      console.log($scope.authData);
+    }).catch(function(error) {
+      $scope.error = error;
+      console.log($scope.error);
     });
   };
 
