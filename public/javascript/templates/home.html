@@ -7,7 +7,7 @@
         <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
       </div>
 
-      <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="col-sm-5 col-md-5 col-lg-5">
         <input type="text"
         class="form-control addMovie"
         name="movieTitle"
@@ -17,16 +17,26 @@
         typeahead-no-results="noResults"
         typeahead-min-length="3"
         typeahead-on-select="onSelect($item)"
-        placeholder="Add the worst movie you've seen!"/>
-        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        placeholder="Add the worst movie you've seen!"
+        ng-if="authData"/>
+        <span class="glyphicon glyphicon-search form-control-feedback" ng-if="authData"></span>
         <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
         <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
         <div ng-show="noResults">
           <i class="glyphicon glyphicon-remove"></i> No Results Found
         </div>
+
+        <span ng-if="!authData">Login with: </span>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Google</button>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Facebook</button>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Twitter</button>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Anonymously</button>
+
       </div>
 
-
+      <div class="col-sm-1 col-md-1 col-lg-1">
+        <button type="button" class="btn btn-info btn-block" ng-click="logout()" ng-if="authData">Logout</button>
+      </div>
 
       <div class="col-sm-3 col-md-3 col-lg-3">
         <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
@@ -48,18 +58,6 @@
     <p class="text-justify">On the SHOW page, comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons.</p>
     <p class="text-justify">The <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Node-back-end">back end code</a> and <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Angular-Front-End">front end code</a> are on GitHub. Tutorials to make the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Node_and_Express.md">back end</a>, the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Angular_CRUD.md">front end</a>, and the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Typeahead.md">asynchronous typeahead</a> are also on GitHub.</p>
   </div>
-
-
-  <div class="row">
-    <div class="col-sm-12">
-      <button type="button" class="btn btn-info btn-block" ng-click="login()">Login Anonymously</button>
-      <p ng-if="authData">Logged in user: <strong>{{ authData.uid }}</strong></p>
-      <p ng-if="error">Error: <strong>{{ error }}</strong></p>
-    </div>
-  </div>
-
-
-
 
   <!-- orderBy labels row -->
   <div class="row visible-sm-block visible-md-block visible-lg-block">

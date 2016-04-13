@@ -3,7 +3,7 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
   $scope.loading = true;
 
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
-  var auth = $firebaseAuth(ref);
+  $scope.authObj = $firebaseAuth(ref);
   $scope.movies = $firebaseArray(ref);
   $scope.order = '$id';
   $scope.reverse = true;
@@ -55,12 +55,26 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     $scope.authData = null;
     $scope.error = null;
 
-    auth.$authAnonymously().then(function(authData) {
+    $scope.authObj.$authAnonymously().then(function(authData) {
       $scope.authData = authData;
       console.log($scope.authData);
     }).catch(function(error) {
       $scope.error = error;
       console.log($scope.error);
+    });
+  };
+
+  $scope.logout = function() {
+    console.log("Logging out!");
+    $scope.authObj.$unauth();
+    $scope.authObj.$onAuth(function(authData) {
+      if (authData) {
+        console.log("Logged in as:", authData.uid);
+      } else {
+        $scope.authData = null;
+        console.log("Logged out");
+        console.log($scope.authData);
+      }
     });
   };
 
