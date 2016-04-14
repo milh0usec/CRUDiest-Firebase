@@ -3,11 +3,11 @@
   <div class="addNewMovie row">
     <form class="form-horizontal" ng-submit="addMovie()" name="newMovie">
 
-      <div class="col-sm-3 col-md-3 col-lg-3">
+      <div class="col-sm-2 col-md-2 col-lg-2">
         <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
       </div>
 
-      <div class="col-sm-5 col-md-5 col-lg-5">
+      <div class="col-sm-6 col-md-6 col-lg-6">
         <input type="text"
         class="form-control addMovie"
         name="movieTitle"
@@ -27,20 +27,22 @@
         </div>
 
         <span ng-if="!authData">Login with: </span>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Google</button>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Facebook</button>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Twitter</button>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData">Anonymously</button>
+        <button type="button" class="btn btn-info" ng-click="loginGoogle()" ng-if="!authData.uid">Google</button>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Facebook</button>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Twitter</button>
+        <button type="button" class="btn btn-info" ng-click="loginGitHub()" ng-if="!authData.uid">GitHub</button>
+        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">E-mail &amp; password</button>
 
       </div>
 
-      <div class="col-sm-1 col-md-1 col-lg-1">
-        <button type="button" class="btn btn-info btn-block" ng-click="logout()" ng-if="authData">Logout</button>
+      <div class="col-sm-2 col-md-2 col-lg-2">
+        <button type="button" class="btn btn-info btn-block" ng-click="loginAnon()" ng-if="!authData.uid">Anonymously</button>
+        <button type="button" class="btn btn-info btn-block" ng-click="logout()" ng-if="authData.uid">Logout</button>
       </div>
 
-      <div class="col-sm-3 col-md-3 col-lg-3">
+      <div class="col-sm-2 col-md-2 col-lg-2">
         <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
-          <button type="button" class="btn btn-danger btn-block">Download My Résumé</button>
+          <button type="button" class="btn btn-danger btn-block">Résumé</button>
         </a>
       </div>
 

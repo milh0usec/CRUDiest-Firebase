@@ -51,10 +51,9 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     });
   };
 
-  $scope.login = function() {
+  $scope.loginAnon = function() {
     $scope.authData = null;
     $scope.error = null;
-
     $scope.authObj.$authAnonymously().then(function(authData) {
       $scope.authData = authData;
       console.log($scope.authData);
@@ -63,6 +62,29 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
       console.log($scope.error);
     });
   };
+
+  $scope.loginGoogle = function() {
+    $scope.authData = null;
+    $scope.error = null;
+    $scope.authObj.$authWithOAuthPopup("google").then(function(authData) {
+      $scope.authData = authData;
+      console.log("Logged in as:", authData.uid);
+    }).catch(function(error) {
+      console.error("Authentication failed:", error);
+    });
+  };
+
+  $scope.loginGitHub = function() {
+    $scope.authData = null;
+    $scope.error = null;
+    $scope.authObj.$authWithOAuthPopup("github").then(function(authData) {
+      console.log("Logged in as:", authData.uid);
+    }).catch(function(error) {
+      console.error("Authentication failed:", error);
+    });
+  };
+
+
 
   $scope.logout = function() {
     console.log("Logging out!");
