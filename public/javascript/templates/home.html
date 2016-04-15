@@ -28,119 +28,145 @@
 
         <span ng-if="!authData">Login with: </span>
         <button type="button" class="btn btn-info" ng-click="loginGoogle()" ng-if="!authData.uid">Google</button>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Facebook</button>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Twitter</button>
-        <button type="button" class="btn btn-info" ng-click="loginGitHub()" ng-if="!authData.uid">GitHub</button>
-        <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">E-mail &amp; password</button>
 
-      </div>
+        <!--
+        Below we include the Login Button social plugin. This button uses
+        the JavaScript SDK to present a graphical Login button that triggers
+        the FB.login() function when clicked.
+      -->
 
-      <div class="col-sm-2 col-md-2 col-lg-2">
-        <button type="button" class="btn btn-info btn-block" ng-click="loginAnon()" ng-if="!authData.uid">Anonymously</button>
-        <button type="button" class="btn btn-info btn-block" ng-click="logout()" ng-if="authData.uid">Logout</button>
-      </div>
+      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
-      <div class="col-sm-2 col-md-2 col-lg-2">
-        <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
-          <button type="button" class="btn btn-danger btn-block">Résumé</button>
-        </a>
-      </div>
 
-    </form>
+
+    <!-- <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Facebook</button> -->
+    <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Twitter</button>
+    <button type="button" class="btn btn-info" ng-click="loginGitHub()" ng-if="!authData.uid">GitHub</button>
+    <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">E-mail &amp; password</button>
+
   </div>
 
-  <!-- Tech Summary row -->
-  <div class="row well well-lg" ng-show="techSummary">
-    <p class="lead text-justify">MEAN stack CRUD app optimized for speed with Angular, Bootstrap, and async typeahead.</p>
-    <p class="text-justify">This is two apps, with separate back and front ends. The back end uses Node, Express, and MongoDB and is deployed on Heroku. The data is served to an API as JSON objects. MongoDB is accessed via the lightweight, schemaless Monk Node module.</p>
-    <p class="text-justify">The front end uses Angular and Bootstrap and is deployed on Firebase. There are three views: INDEX/NEW (Home), SHOW, and EDIT. The asynchronous typeahead reduces the typing required to add a new movie to a few keystrokes so a separate NEW view isn't needed.</p>
-    <p class="text-justify">The asynchronous typeahead is implemented with UI Boostrap. Each keystroke makes an HTTP request to the Open Movie Database, which returns ten movie titles. onSelect (clicking a movie title) fires an HTTP GET request for a single movie to the OMDB which returns the movie data. This movie is then pushed locally to the $scope.movies array. This updates the INDEX view almost instantly. Then, running in the background, an HTTP POST adds the movie to the CRUDiest Movies Database. Lastly, an HTTP GET request to the CRUDiest Movies Database gets all the movies and syncs to $scope. This is the slowest step but happens without the user's awareness.</p>
-    <p class="text-justify">The "Order By" buttons have ng-click set up with two values, <i>order</i> and <i>reverse</i>. These values are passed to the $scope and then to ng-repeat.</p>
-    <p class="text-justify">The app is responsive. The number of movies displayed per row changes from five in the large view, to four in the medium view, three in the small view, and two on mobile devices.</p>
-    <p class="text-justify">On the SHOW page, comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons.</p>
-    <p class="text-justify">The <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Node-back-end">back end code</a> and <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Angular-Front-End">front end code</a> are on GitHub. Tutorials to make the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Node_and_Express.md">back end</a>, the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Angular_CRUD.md">front end</a>, and the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Typeahead.md">asynchronous typeahead</a> are also on GitHub.</p>
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <button type="button" class="btn btn-info btn-block" ng-click="loginAnon()" ng-if="!authData.uid">Anonymously</button>
+    <button type="button" class="btn btn-info btn-block" ng-click="logout()" ng-if="authData.uid">Logout</button>
   </div>
 
-  <!-- orderBy labels row -->
-  <div class="row visible-sm-block visible-md-block visible-lg-block">
-    <div class="col-sm-4 text-center">
-      <h4>Order by Date Added</h4>
-    </div>
-    <div class="col-sm-4 text-center">
-      <h4>Order by Rating</h4>
-    </div>
-    <div class="col-sm-4 text-center">
-      <h4>Order by Year</h4>
-    </div>
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
+      <button type="button" class="btn btn-danger btn-block">Résumé</button>
+    </a>
   </div>
 
-  <!-- orderBy buttons row, mobile screens -->
-  <div class="row visible-xs-block">
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = true">Order By Recently Added</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = false">Order By Least Recently Added</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = false">Order By Worst First</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = true">Order By Best First</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = true">Order By Newest</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = false">Order By Oldest</button>
-    </div>
-  </div>
+</form>
+</div>
 
-  <!-- orderBy buttons row, large screens -->
-  <div class="row visible-sm-block visible-md-block visible-lg-block">
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = true">Recent</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = false">Oldest</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = false">Worst</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = true">Best</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = true">Newest</button>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = false">Oldest</button>
-    </div>
-  </div>
+<!-- Facebook Likes row -->
+<br/>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div
+  class="fb-like col-lg-4"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 
-  <!-- Responsive views -->
-  <div class="row visible-xs-block">
-    <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie.$id}}"><img class="extraSmallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
-    </div>
-  </div>
+<div class="col-lg-4" id="status"></div>
+<div class="col-lg-2"></div>
+</div>
 
-  <div class="row visible-sm-block">
-    <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie.$id}}"><img class="smallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
-    </div>
-  </div>
+<!-- Tech Notes row -->
+<div class="row well well-lg" ng-show="techSummary">
+  <p class="lead text-justify">MEAN stack CRUD app optimized for speed with Angular, Bootstrap, and async typeahead.</p>
+  <p class="text-justify">This is two apps, with separate back and front ends. The back end uses Node, Express, and MongoDB and is deployed on Heroku. The data is served to an API as JSON objects. MongoDB is accessed via the lightweight, schemaless Monk Node module.</p>
+  <p class="text-justify">The front end uses Angular and Bootstrap and is deployed on Firebase. There are three views: INDEX/NEW (Home), SHOW, and EDIT. The asynchronous typeahead reduces the typing required to add a new movie to a few keystrokes so a separate NEW view isn't needed.</p>
+  <p class="text-justify">The asynchronous typeahead is implemented with UI Boostrap. Each keystroke makes an HTTP request to the Open Movie Database, which returns ten movie titles. onSelect (clicking a movie title) fires an HTTP GET request for a single movie to the OMDB which returns the movie data. This movie is then pushed locally to the $scope.movies array. This updates the INDEX view almost instantly. Then, running in the background, an HTTP POST adds the movie to the CRUDiest Movies Database. Lastly, an HTTP GET request to the CRUDiest Movies Database gets all the movies and syncs to $scope. This is the slowest step but happens without the user's awareness.</p>
+  <p class="text-justify">The "Order By" buttons have ng-click set up with two values, <i>order</i> and <i>reverse</i>. These values are passed to the $scope and then to ng-repeat.</p>
+  <p class="text-justify">The app is responsive. The number of movies displayed per row changes from five in the large view, to four in the medium view, three in the small view, and two on mobile devices.</p>
+  <p class="text-justify">On the SHOW page, comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons.</p>
+  <p class="text-justify">The <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Node-back-end">back end code</a> and <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Angular-Front-End">front end code</a> are on GitHub. Tutorials to make the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Node_and_Express.md">back end</a>, the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Angular_CRUD.md">front end</a>, and the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Typeahead.md">asynchronous typeahead</a> are also on GitHub.</p>
+</div>
 
-  <div class="row visible-md-block">
-    <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie.$id}}"><img class="mediumMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
-    </div>
+<!-- orderBy labels row -->
+<div class="row visible-sm-block visible-md-block visible-lg-block">
+  <div class="col-sm-4 text-center">
+    <h4>Order by Date Added</h4>
   </div>
+  <div class="col-sm-4 text-center">
+    <h4>Order by Rating</h4>
+  </div>
+  <div class="col-sm-4 text-center">
+    <h4>Order by Year</h4>
+  </div>
+</div>
 
-  <div class="row visible-lg-block">
-    <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
-      <a ng-href="/#/movies/{{movie.$id}}"><img class="largeMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
-    </div>
+<!-- orderBy buttons row, mobile screens -->
+<div class="row visible-xs-block">
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = true">Order By Recently Added</button>
   </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = false">Order By Least Recently Added</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = false">Order By Worst First</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = true">Order By Best First</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = true">Order By Newest</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = false">Order By Oldest</button>
+  </div>
+</div>
+
+<!-- orderBy buttons row, large screens -->
+<div class="row visible-sm-block visible-md-block visible-lg-block">
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = true">Recent</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary btn-block" ng-click="order = '$id'; reverse = false">Oldest</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = false">Worst</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-warning btn-block" ng-click="order = 'movieImdbRating'; reverse = true">Best</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = true">Newest</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-success btn-block" ng-click="order = 'movieYear'; reverse = false">Oldest</button>
+  </div>
+</div>
+
+<!-- Responsive views -->
+<div class="row visible-xs-block">
+  <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
+    <a ng-href="/#/movies/{{movie.$id}}"><img class="extraSmallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+  </div>
+</div>
+
+<div class="row visible-sm-block">
+  <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
+    <a ng-href="/#/movies/{{movie.$id}}"><img class="smallMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+  </div>
+</div>
+
+<div class="row visible-md-block">
+  <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
+    <a ng-href="/#/movies/{{movie.$id}}"><img class="mediumMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+  </div>
+</div>
+
+<div class="row visible-lg-block">
+  <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
+    <a ng-href="/#/movies/{{movie.$id}}"><img class="largeMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
+  </div>
+</div>
 
 </div>
