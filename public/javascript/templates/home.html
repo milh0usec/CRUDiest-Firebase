@@ -29,22 +29,41 @@
         <span ng-if="!authData">Login with: </span>
         <button type="button" class="btn btn-info" ng-click="loginGoogle()" ng-if="!authData.uid">Google</button>
 
-        <!--
-        Below we include the Login Button social plugin. This button uses
-        the JavaScript SDK to present a graphical Login button that triggers
-        the FB.login() function when clicked.
-      -->
-
-      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-
-
-
-    <!-- <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Facebook</button> -->
-    <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">Twitter</button>
+    <button type="button" class="btn btn-info" ng-click="loginFacebook()" ng-if="!authData.uid">Facebook</button>
+    <button type="button" class="btn btn-info" ng-click="loginTwitter()" ng-if="!authData.uid">Twitter</button>
     <button type="button" class="btn btn-info" ng-click="loginGitHub()" ng-if="!authData.uid">GitHub</button>
-    <button type="button" class="btn btn-info" ng-click="login()" ng-if="!authData.uid">E-mail &amp; password</button>
+    <button type="button" class="btn btn-info" ng-click="loginEmail()" ng-if="!authData.uid">E-mail &amp; password</button>
 
   </div>
+
+  <div ng-controller="ModalDemoCtrl">
+      <script type="text/ng-template" id="myModalContent.html">
+          <div class="modal-header">
+              <h3 class="modal-title">I'm a modal!</h3>
+          </div>
+          <div class="modal-body">
+              <ul>
+                  <li ng-repeat="item in items">
+                      <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                  </li>
+              </ul>
+              Selected: <b>{{ selected.item }}</b>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+              <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+          </div>
+      </script>
+
+      <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+      <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
+      <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
+      <button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
+      <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+  </div>
+
+
+
 
   <div class="col-sm-2 col-md-2 col-lg-2">
     <button type="button" class="btn btn-info btn-block" ng-click="loginAnon()" ng-if="!authData.uid">Anonymously</button>
