@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth) {
+app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', '$timeout', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth, $timeout) {
   console.log("Home controller.");
   $scope.loading = true;
 
@@ -113,7 +113,8 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     $scope.loginEmail.login = true;
   };
 
-  $scope.newUser = function() {
+  $scope.user = {};
+  $scope.newUser = function(user) {
     ref.createUser({
       email: $scope.user.email,
       password: $scope.user.password
@@ -122,13 +123,18 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
         console.log("Error creating user:", error);
       } else {
         console.log("Successfully created user account with uid:", userData.uid);
+        $scope.reset();
+        $scope.loginEmail.login = false;
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
       }
     });
   };
 
   $scope.master = {};
-
   $scope.reset = function() {
+    console.log("Resetting!");
     angular.copy($scope.master, $scope.user);
   };
 
