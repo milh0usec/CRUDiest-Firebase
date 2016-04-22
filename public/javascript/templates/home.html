@@ -88,14 +88,14 @@
 <form>
   <div class="form-group">
     <label for="enterEmail">E-mail address</label>
-    <input type="email" ng-model="email" class="form-control" id="enterEmail" placeholder="E-mail address">
+    <input type="email" ng-model="user.email" class="form-control" id="enterEmail" placeholder="E-mail address">
   </div>
   <div class="form-group">
     <label for="enterPassword">Password</label>
-    <input type="password" ng-model="password" class="form-control" id="enterPassword" placeholder="Password">
+    <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
   </div>
-  <input type="submit" ng-click="newUser(email, password)" class="btn btn-default" value="Create New User" />
-  <input type="button" ng-click="reset()" value="Reset" />
+  <input type="submit" ng-click="newUser()" class="btn btn-default" value="Create New User" />
+  <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
   </div>
 </form>
 </div>

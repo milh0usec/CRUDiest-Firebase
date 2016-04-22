@@ -110,18 +110,13 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
   // E-mail & password login functions
 
   $scope.loginEmail = function() {
-$scope.loginEmail.login = true;
+    $scope.loginEmail.login = true;
   };
 
-  $scope.master = {};
-
-  $scope.newUser = function(email, password) {
-    $scope.loginEmail.login = true
-    console.log(email);
-    console.log(password);
-    $scope.movies.createUser({
-      email    : email,
-      password : password
+  $scope.newUser = function() {
+    ref.createUser({
+      email: $scope.user.email,
+      password: $scope.user.password
     }, function(error, userData) {
       if (error) {
         console.log("Error creating user:", error);
@@ -131,8 +126,10 @@ $scope.loginEmail.login = true;
     });
   };
 
+  $scope.master = {};
+
   $scope.reset = function() {
-    $scope.user = angular.copy($scope.master);
+    angular.copy($scope.master, $scope.user);
   };
 
 
