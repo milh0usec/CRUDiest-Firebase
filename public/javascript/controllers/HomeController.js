@@ -107,12 +107,21 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     });
   };
 
+  // E-mail & password login functions
 
+  $scope.loginEmail = function() {
+$scope.loginEmail.login = true;
+  };
 
-  $scope.newUser = function() {
+  $scope.master = {};
+
+  $scope.newUser = function(email, password) {
+    $scope.loginEmail.login = true
+    console.log(email);
+    console.log(password);
     $scope.movies.createUser({
-      email    : "bobtony@firebase.com",
-      password : "correcthorsebatterystaple"
+      email    : email,
+      password : password
     }, function(error, userData) {
       if (error) {
         console.log("Error creating user:", error);
@@ -122,8 +131,19 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     });
   };
 
+  $scope.reset = function() {
+    $scope.user = angular.copy($scope.master);
+  };
 
 
+
+
+
+
+
+
+
+  // Logout
 
   $scope.logout = function() {
     console.log("Logging out!");
