@@ -107,7 +107,7 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     });
   };
 
-  // E-mail & password login functions
+  // Create new user with e-mail & password
 
   $scope.loginEmail = function() {
     $scope.loginEmail.login = true;
@@ -153,7 +153,36 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     $scope.alerts.splice(index, 1);
   };
 
+  // Login user with e-mail and password
 
+  $scope.loginUser = function(user) {
+    $scope.authData = null;
+    $scope.error = null;
+    ref.authWithPassword({
+      email: $scope.user.email,
+      password: $scope.user.password
+    }, function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+        $scope.alerts.push({
+          msg: 'Error: The specified e-mail address or password is incorrect.'
+        });
+        console.log($scope.alerts);
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      } else {
+        console.log("Authenticated successfully with payload:", authData);
+        $scope.authData = authData;
+        $scope.reset();
+        $scope.loginEmail.login = false;
+        $scope.closeAlert();
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      }
+    });
+  };
 
 
 
