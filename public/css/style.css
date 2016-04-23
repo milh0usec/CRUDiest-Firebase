@@ -106,3 +106,14 @@ h1 {
   75% { opacity: 1;}
   100% { opacity: 0;}
 }
+
+.newUser {
+  margin-top: 12px;
+}
+
+.alert {
+  color: red;
+  background-color: white;
+  border-color: red;
+  margin-top: 12px;
+}

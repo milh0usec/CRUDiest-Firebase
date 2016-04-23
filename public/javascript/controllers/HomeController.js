@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', '$timeout', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth, $timeout) {
+app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth) {
   console.log("Home controller.");
   $scope.loading = true;
 
@@ -121,6 +121,13 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     }, function(error, userData) {
       if (error) {
         console.log("Error creating user:", error);
+        $scope.alerts.push({
+          msg: 'Error: The specified e-mail address is already in use.'
+        });
+        console.log($scope.alerts);
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
       } else {
         console.log("Successfully created user account with uid:", userData.uid);
         $scope.reset();
@@ -138,7 +145,13 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     angular.copy($scope.master, $scope.user);
   };
 
+  // Alerts
 
+  $scope.alerts = [];
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
 
 
 
