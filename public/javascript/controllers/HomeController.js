@@ -163,11 +163,11 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
       password: $scope.user.password
     }, function(error, authData) {
       if (error) {
-        console.log("Login Failed!", error);
-        $scope.alerts.push({
-          msg: 'Error: The specified e-mail address or password is incorrect.'
-        });
-        console.log($scope.alerts);
+        console.log("Error creating user:", error);
+        $scope.alerts = [{
+          type: 'danger',
+          msg: error
+        }];
         $scope.$apply(function() {
           console.log("Applied!");
         });
@@ -196,14 +196,80 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
         console.log("Email changed successfully");
         $scope.changeAddress = false;
         $scope.alerts.push({
-          msg: 'Success! E-mail address updated.',
-          type: 'alert-success'
+          type: 'success',
+          msg: 'Success! E-mail address updated.'
         });
         $scope.$apply(function() {
           console.log("Applied!");
         });
       } else {
         console.log("Error changing email:", error);
+        $scope.alerts = [{
+          type: 'danger',
+          msg: error
+        }];
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      }
+    });
+  };
+
+  // Change password
+
+  $scope.updatePassword = function(user) {
+    ref.changePassword({
+      email : $scope.authData.password.email,
+      oldPassword : user.oldPassword,
+      newPassword : user.newPassword
+    }, function(error) {
+      if (error === null) {
+        console.log("Password changed successfully");
+        $scope.changePassword = false;
+        $scope.alerts.push({
+          type: 'success',
+          msg: 'Success! Password updated.'
+        });
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      } else {
+        console.log("Error changing password:", error);
+        $scope.alerts = [{
+          type: 'danger',
+          msg: error
+        }];
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      }
+    });
+  };
+
+  // Reset lost password
+
+  $scope.resetNewPassword = function(user) {
+    ref.resetPassword({
+      email : $scope.authData.password.email
+    }, function(error) {
+      if (error === null) {
+        console.log("Password reset email sent successfully");
+        $scope.alerts.push({
+          type: 'success',
+          msg: 'Password reset email sent successfully.'
+        });
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      } else {
+        console.log("Error sending password reset email:", error);
+        $scope.alerts = [{
+          type: 'danger',
+          msg: error
+        }];
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
       }
     });
   };

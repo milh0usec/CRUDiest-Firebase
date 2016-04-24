@@ -1,6 +1,6 @@
 app.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
 
-  $scope.items = ['item1', 'item2', 'item3'];
+  $scope.items = ['Create new user', 'Login with e-mail and password', 'Change e-mail address', 'Change password', 'Reset lost password'];
 
   $scope.animationsEnabled = true;
 
@@ -8,7 +8,7 @@ app.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
-      templateUrl: 'myModalContent.html',
+      templateUrl: 'javascript/templates/myModalContent.html',
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {

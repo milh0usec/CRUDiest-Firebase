@@ -107,20 +107,6 @@ h1 {
   100% { opacity: 0;}
 }
 
-.newUser {
-  margin-top: 12px;
-}
-
-.alertWarning {
-  color: red;
-  background-color: white;
-  border-color: red;
-  margin-top: 12px;
-}
-
-.alertSuccess {
-  color: green;
-  background-color: white;
-  border-color: green;
+.add12pxTop {
   margin-top: 12px;
 }

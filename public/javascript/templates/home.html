@@ -57,42 +57,34 @@
 
 </div>
 
-<!--
+<!-- Modal window -->
+
 <div ng-controller="ModalDemoCtrl">
-<script type="text/ng-template" id="myModalContent.html">
-<div class="modal-header">
-<h3 class="modal-title">I'm a modal!</h3>
+  <!-- <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+      <h3 class="modal-title">E-mail &amp; password login options</h3>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li ng-repeat="item in items">
+          <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+        </li>
+      </ul>
+      Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+  </script> -->
+
+  <button type="button" class="btn btn-default" ng-click="open('lg')">E-mail &amp; password</button>
+  <div ng-show="selected">Selection from a modal: {{ selected }}</div>
 </div>
-<div class="modal-body">
-<ul>
-<li ng-repeat="item in items">
-<a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-</li>
-</ul>
-Selected: <b>{{ selected.item }}</b>
-</div>
-<div class="modal-footer">
-<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-</div>
-</script>
-
-<button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-<button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
-<button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
-<button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
-<div ng-show="selected">Selection from a modal: {{ selected }}</div>
-</div>
--->
-
-
-
-
-
 
 <!-- E-mail & password login screens -->
 
-<div class="row newUser" ng-if="loginEmail.login">
+<div class="row add12pxTop" ng-if="loginEmail.login">
   <form>
     <div class="form-group">
       <label for="enterEmail">E-mail address</label>
@@ -107,7 +99,7 @@ Selected: <b>{{ selected.item }}</b>
     <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
   </form>
 
-  <uib-alert class="alertWarning" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 </div>
 
 <!-- Show user account -->
@@ -118,27 +110,46 @@ Selected: <b>{{ selected.item }}</b>
 
   <input type="button" ng-click="changeAddress = !changeAddress" class="btn btn-default" value="Change e-mail address" />
   <input type="button" ng-click="changePassword = !changePassword" class="btn btn-default" value="Change password" />
-  <input type="button" ng-click="resetPassword = !resetPassword" class="btn btn-default" value="Reset lost password" />
+  <input type="button" ng-click="resetNewPassword()" class="btn btn-default" value="Reset lost password" />
 
 </div>
 
 <!-- Change e-mail address -->
 
-<div class="row newUser">
+<div class="row add12pxTop">
   <form ng-if="changeAddress">
     <div class="form-group">
       <label for="changeEmail">New e-mail address: </label>
       <input type="email" ng-model="user.email" class="form-control" id="changeEmail" placeholder={{authData.password.email}}>
     </div>
     <div class="form-group">
-      <label for="enterPassword">Enter Password: </label>
+      <label for="enterPassword">Enter password: </label>
       <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
     </div>
     <input type="submit" ng-click="updateAddress(user)" class="btn btn-default" value="Update E-mail Address" />
     <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
   </form>
 
-  <uib-alert class="alertSuccess" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+</div>
+
+<!-- Change password -->
+
+<div class="row add12pxTop">
+  <form ng-show="changePassword">
+    <div class="form-group">
+      <label for="changePassword">Old password: </label>
+      <input type="password" ng-model="user.oldPassword" class="form-control" id="changePassword" placeholder="Old password">
+    </div>
+    <div class="form-group">
+      <label for="enterPassword">New password: </label>
+      <input type="password" ng-model="user.newPassword" class="form-control" id="enterPassword" placeholder="New password">
+    </div>
+    <input type="submit" ng-click="updatePassword(user)" class="btn btn-default" value="Update Password" />
+    <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
+  </form>
+
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 </div>
 
 
