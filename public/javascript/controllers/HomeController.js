@@ -184,9 +184,29 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     });
   };
 
+  // Change e-mail address
 
-
-
+  $scope.updateAddress = function(user) {
+    ref.changeEmail({
+      oldEmail : $scope.authData.password.email,
+      newEmail : user.email,
+      password : user.password
+    }, function(error) {
+      if (error === null) {
+        console.log("Email changed successfully");
+        $scope.changeAddress = false;
+        $scope.alerts.push({
+          msg: 'Success! E-mail address updated.',
+          type: 'alert-success'
+        });
+        $scope.$apply(function() {
+          console.log("Applied!");
+        });
+      } else {
+        console.log("Error changing email:", error);
+      }
+    });
+  };
 
   // Logout
 

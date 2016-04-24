@@ -1,52 +1,73 @@
 <div class="row">
 
-  <div class="addNewMovie row">
+  <!-- Login buttons -->
+
+  <div class="col-sm-8 col-md-8 col-lg-8" ng-if="!authData.uid">
+    <span ng-if="!authData">Login with: </span>
+    <button type="button" class="btn btn-info" ng-click="loginGoogle()">Google</button>
+    <button type="button" class="btn btn-info" ng-click="loginFacebook()">Facebook</button>
+    <button type="button" class="btn btn-info" ng-click="loginTwitter()">Twitter</button>
+    <button type="button" class="btn btn-info" ng-click="loginGitHub()">GitHub</button>
+    <button type="button" class="btn btn-info" ng-click="loginEmail()">E-mail &amp; password</button>
+    <button type="button" class="btn btn-info" ng-click="loginAnon()">Anonymously</button>
+  </div>
+
+  <!-- When user is logged in -->
+
+  <div class="col-sm-4 col-md-4 col-lg-4" ng-if="authData">
     <form class="form-horizontal" ng-submit="addMovie()" name="newMovie">
-
-      <div class="col-sm-2 col-md-2 col-lg-2">
-        <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
+      <input type="text"
+      class="form-control addMovie"
+      name="movieTitle"
+      ng-model="movie.movieTitle"
+      uib-typeahead="address for address in getLocation($viewValue)"
+      typeahead-loading="loadingLocations"
+      typeahead-no-results="noResults"
+      typeahead-min-length="3"
+      typeahead-on-select="onSelect($item)"
+      placeholder="Add the worst movie you've seen!"/>
+      <span class="glyphicon glyphicon-search form-control-feedback" ng-if="authData"></span>
+      <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+      <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+      <div ng-show="noResults">
+        <i class="glyphicon glyphicon-remove"></i> No Results Found
       </div>
+    </form>
+  </div>
 
-      <div class="col-sm-6 col-md-6 col-lg-6">
-        <input type="text"
-        class="form-control addMovie"
-        name="movieTitle"
-        ng-model="movie.movieTitle"
-        uib-typeahead="address for address in getLocation($viewValue)"
-        typeahead-loading="loadingLocations"
-        typeahead-no-results="noResults"
-        typeahead-min-length="3"
-        typeahead-on-select="onSelect($item)"
-        placeholder="Add the worst movie you've seen!"
-        ng-if="authData"/>
-        <span class="glyphicon glyphicon-search form-control-feedback" ng-if="authData"></span>
-        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-        <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
-        <div ng-show="noResults">
-          <i class="glyphicon glyphicon-remove"></i> No Results Found
-        </div>
+  <div class="col-sm-2 col-md-2 col-lg-2" ng-if="authData.uid">
+    <button type="button" class="btn btn-info btn-block" ng-click="logout()">Logout</button>
+  </div>
 
-        <span ng-if="!authData">Login with: </span>
-        <button type="button" class="btn btn-info" ng-click="loginGoogle()" ng-if="!authData.uid">Google</button>
+  <div class="col-sm-2 col-md-2 col-lg-2" ng-show="authData.uid">
+    <button type="button" class="btn btn-info btn-block" ng-click="showAccount = !showAccount">Account</button>
+  </div>
 
-        <button type="button" class="btn btn-info" ng-click="loginFacebook()" ng-if="!authData.uid">Facebook</button>
-        <button type="button" class="btn btn-info" ng-click="loginTwitter()" ng-if="!authData.uid">Twitter</button>
-        <button type="button" class="btn btn-info" ng-click="loginGitHub()" ng-if="!authData.uid">GitHub</button>
-        <button type="button" class="btn btn-info" ng-click="loginEmail()" ng-if="!authData.uid">E-mail &amp; password</button>
+  <!-- Tech notes and resume -->
 
-      </div>
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <button type="button" class="btn btn-danger btn-block" ng-click="techSummmary = !techSummmary">Tech Notes</button>
+  </div>
 
-      <!--
-      <div ng-controller="ModalDemoCtrl">
-      <script type="text/ng-template" id="myModalContent.html">
-      <div class="modal-header">
-      <h3 class="modal-title">I'm a modal!</h3>
-    </div>
-    <div class="modal-body">
-    <ul>
-    <li ng-repeat="item in items">
-    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-  </li>
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
+      <button type="button" class="btn btn-danger btn-block">Résumé</button>
+    </a>
+  </div>
+
+</div>
+
+<!--
+<div ng-controller="ModalDemoCtrl">
+<script type="text/ng-template" id="myModalContent.html">
+<div class="modal-header">
+<h3 class="modal-title">I'm a modal!</h3>
+</div>
+<div class="modal-body">
+<ul>
+<li ng-repeat="item in items">
+<a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+</li>
 </ul>
 Selected: <b>{{ selected.item }}</b>
 </div>
@@ -67,19 +88,7 @@ Selected: <b>{{ selected.item }}</b>
 
 
 
-<div class="col-sm-2 col-md-2 col-lg-2">
-  <button type="button" class="btn btn-info btn-block" ng-click="loginAnon()" ng-if="!authData.uid">Anonymously</button>
-  <button type="button" class="btn btn-info btn-block" ng-click="logout()" ng-if="authData.uid">Logout</button>
-</div>
 
-<div class="col-sm-2 col-md-2 col-lg-2">
-  <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
-    <button type="button" class="btn btn-danger btn-block">Résumé</button>
-  </a>
-</div>
-
-</form>
-</div>
 
 <!-- E-mail & password login screens -->
 
@@ -98,8 +107,41 @@ Selected: <b>{{ selected.item }}</b>
     <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
   </form>
 
-  <uib-alert class="alert" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <uib-alert class="alertWarning" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 </div>
+
+<!-- Show user account -->
+
+<div class="row" ng-show="showAccount">
+
+  <p>Your e-mail address: <strong>{{authData.password.email}}</strong></p>
+
+  <input type="button" ng-click="changeAddress = !changeAddress" class="btn btn-default" value="Change e-mail address" />
+  <input type="button" ng-click="changePassword = !changePassword" class="btn btn-default" value="Change password" />
+  <input type="button" ng-click="resetPassword = !resetPassword" class="btn btn-default" value="Reset lost password" />
+
+</div>
+
+<!-- Change e-mail address -->
+
+<div class="row newUser">
+  <form ng-if="changeAddress">
+    <div class="form-group">
+      <label for="changeEmail">New e-mail address: </label>
+      <input type="email" ng-model="user.email" class="form-control" id="changeEmail" placeholder={{authData.password.email}}>
+    </div>
+    <div class="form-group">
+      <label for="enterPassword">Enter Password: </label>
+      <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
+    </div>
+    <input type="submit" ng-click="updateAddress(user)" class="btn btn-default" value="Update E-mail Address" />
+    <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
+  </form>
+
+  <uib-alert class="alertSuccess" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+</div>
+
+
 
 <!-- Tech Notes row -->
 <div class="row well well-lg" ng-show="techSummary">
@@ -193,6 +235,4 @@ Selected: <b>{{ selected.item }}</b>
   <div ng-repeat="movie in movies | orderBy : order : reverse" class="movieIndex">
     <a ng-href="/#/movies/{{movie.$id}}"><img class="largeMoviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"></a>
   </div>
-</div>
-
 </div>
