@@ -40,7 +40,7 @@ app.controller('LoginModalInstanceCtrl', ['$scope', '$uibModalInstance', '$fireb
   // Reset button
   $scope.master = {};
   $scope.reset = function() {
-    console.log("Resetting!");
+    console.log("Resetting from LoginModalInstanceCtrl!");
     angular.copy($scope.master, $scope.user);
   };
 

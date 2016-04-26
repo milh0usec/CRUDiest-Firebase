@@ -1,8 +1,50 @@
-<div class="row">
+<div class="modal-header">
+  <h3 class="modal-title">Update Account Settings</h3>
+</div>
 
+<div class="modal-body">
 
-  <input type="button" ng-click="" class="btn btn-default" value="Change e-mail address" />
-  <input type="button" ng-click="" class="btn btn-default" value="Change password" />
-  <input type="button" ng-click="" class="btn btn-default" value="Reset lost password" />
+  <p>Your e-mail address:<strong>{{authData.password.email}}</strong></p>
 
+  <uib-tabset>
+    <uib-tab heading="Update E-mail Address">
+      <form>
+        <div class="form-group">
+          <label for="changeEmail">New e-mail address: </label>
+          <input type="email" ng-model="user.email" class="form-control" id="changeEmail" placeholder={{authData.password.email}}>
+        </div>
+        <div class="form-group">
+          <label for="enterPassword">Enter password: </label>
+          <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
+        </div>
+        <input type="submit" ng-click="updateAddress(user)" class="btn btn-default" value="Update E-mail Address" />
+        <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
+      </form>
+    </uib-tab>
+
+    <uib-tab heading="Update Password">
+      <form>
+        <div class="form-group">
+          <label for="changePassword">Old password: </label>
+          <input type="password" ng-model="user.oldPassword" class="form-control" id="changePassword" placeholder="Old password">
+        </div>
+        <div class="form-group">
+          <label for="enterPassword">New password: </label>
+          <input type="password" ng-model="user.newPassword" class="form-control" id="enterPassword" placeholder="New password">
+        </div>
+        <input type="submit" ng-click="updatePassword(user)" class="btn btn-default" value="Update Password" />
+        <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
+      </form>
+    </uib-tab>
+
+    <uib-tab heading="Reset Lost Password">
+      <input type="button" ng-click="resetNewPassword()" class="btn btn-default" value="Reset lost password" />
+    </uib-tab>
+  </uib-tabset>
+
+</div>
+
+<div class="modal-footer">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <button class="btn btn-warning" type="button" ng-click="cancel()">Close Modal Window</button>
 </div>
