@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth) {
+app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', '$uibModal', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth, $uibModal) {
   console.log("Home controller.");
   $scope.loading = true;
 
@@ -8,6 +8,16 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
   $scope.order = '$id';
   $scope.reverse = true;
   $scope.loading = false;
+
+  // Check if a user is logged in
+
+  // var authData = $scope.authObj.$getAuth();
+  // $scope.authData = authData;
+  // if (authData) {
+  //   console.log("Logged in as:", authData.uid);
+  // } else {
+  //   console.log("Logged out");
+  // }
 
   $scope.getLocation = function(val) {
     return $http.get('//www.omdbapi.com/?s=' + val)
@@ -56,7 +66,7 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     $scope.error = null;
     $scope.authObj.$authAnonymously().then(function(authData) {
       $scope.authData = authData;
-      console.log($scope.authData);
+      console.log($scope.authData.uid);
     }).catch(function(error) {
       $scope.error = error;
       console.log($scope.error);
@@ -109,41 +119,41 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
 
   // Create new user with e-mail & password
 
-  $scope.loginEmail = function() {
-    $scope.loginEmail.login = true;
-  };
+  // $scope.loginEmail = function() {
+  //   $scope.loginEmail.login = true;
+  // };
 
-  $scope.user = {};
-  $scope.newUser = function(user) {
-    ref.createUser({
-      email: $scope.user.email,
-      password: $scope.user.password
-    }, function(error, userData) {
-      if (error) {
-        console.log("Error creating user:", error);
-        $scope.alerts.push({
-          msg: 'Error: The specified e-mail address is already in use.'
-        });
-        console.log($scope.alerts);
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-      } else {
-        console.log("Successfully created user account with uid:", userData.uid);
-        $scope.reset();
-        $scope.loginEmail.login = false;
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-      }
-    });
-  };
-
-  $scope.master = {};
-  $scope.reset = function() {
-    console.log("Resetting!");
-    angular.copy($scope.master, $scope.user);
-  };
+  // $scope.user = {};
+  // $scope.newUser = function(user) {
+  //   ref.createUser({
+  //     email: $scope.user.email,
+  //     password: $scope.user.password
+  //   }, function(error, userData) {
+  //     if (error) {
+  //       console.log("Error creating user:", error);
+  //       $scope.alerts.push({
+  //         msg: 'Error: The specified e-mail address is already in use.'
+  //       });
+  //       console.log($scope.alerts);
+  //       $scope.$apply(function() {
+  //         console.log("Applied!");
+  //       });
+  //     } else {
+  //       console.log("Successfully created user account with uid:", userData.uid);
+  //       $scope.reset();
+  //       $scope.loginEmail.login = false;
+  //       $scope.$apply(function() {
+  //         console.log("Applied!");
+  //       });
+  //     }
+  //   });
+  // };
+  //
+  // $scope.master = {};
+  // $scope.reset = function() {
+  //   console.log("Resetting!");
+  //   angular.copy($scope.master, $scope.user);
+  // };
 
   // Alerts
 
@@ -153,35 +163,30 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
     $scope.alerts.splice(index, 1);
   };
 
-  // Login user with e-mail and password
-
-  $scope.loginUser = function(user) {
-    $scope.authData = null;
-    $scope.error = null;
-    ref.authWithPassword({
-      email: $scope.user.email,
-      password: $scope.user.password
-    }, function(error, authData) {
-      if (error) {
-        console.log("Error creating user:", error);
-        $scope.alerts = [{
-          type: 'danger',
-          msg: error
-        }];
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-      } else {
-        console.log("Authenticated successfully with payload:", authData);
-        $scope.authData = authData;
-        $scope.reset();
-        $scope.loginEmail.login = false;
-        $scope.closeAlert();
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-      }
+  // Open login modal window
+  $scope.openLoginModal = function(size) {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'javascript/templates/loginModalContent.html',
+      controller: 'LoginModalInstanceCtrl',
+      size: size
     });
+    modalInstance.result.then(function(authData){
+      console.log(authData);
+      $scope.authData = authData;
+    });
+  };
+
+  // Open account modal window
+  $scope.openAccountModal = function(size) {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'javascript/templates/accountModalContent.html',
+      controller: 'AccountModalInstanceCtrl',
+      size: size
+    });
+    // modalInstance.result.then(function(authData){
+    //   console.log(authData);
+    //   $scope.authData = authData;
+    // });
   };
 
   // Change e-mail address

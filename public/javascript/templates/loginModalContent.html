@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h3 class="modal-title">E-mail &amp; Password Login</h3>
+</div>
+
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="enterEmail">E-mail address</label>
+      <input type="email" ng-model="user.email" class="form-control" id="enterEmail" placeholder="E-mail address">
+    </div>
+    <div class="form-group">
+      <label for="enterPassword">Password</label>
+      <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
+    </div>
+    <input type="submit" ng-click="newUser(user)" class="btn btn-default" value="Create New User" />
+    <input type="submit" ng-click="loginUser(user)" class="btn btn-default" value="Login" />
+    <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
+  </form>
+</div>
+
+<div class="modal-footer">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <button class="btn btn-warning" type="button" ng-click="cancel()">Close Modal Window</button>
+</div>

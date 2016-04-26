@@ -1,20 +1,22 @@
 <div class="row">
 
+  <ng-focus="logMe()">
+
   <!-- Login buttons -->
 
-  <div class="col-sm-8 col-md-8 col-lg-8" ng-if="!authData.uid">
+  <div class="col-sm-8 col-md-8 col-lg-8" ng-show="!authData.uid">
     <span ng-if="!authData">Login with: </span>
     <button type="button" class="btn btn-info" ng-click="loginGoogle()">Google</button>
     <button type="button" class="btn btn-info" ng-click="loginFacebook()">Facebook</button>
     <button type="button" class="btn btn-info" ng-click="loginTwitter()">Twitter</button>
     <button type="button" class="btn btn-info" ng-click="loginGitHub()">GitHub</button>
-    <button type="button" class="btn btn-info" ng-click="loginEmail()">E-mail &amp; password</button>
+    <button type="button" class="btn btn-info" ng-click="openLoginModal('md')">E-mail &amp; password</button>
     <button type="button" class="btn btn-info" ng-click="loginAnon()">Anonymously</button>
   </div>
 
   <!-- When user is logged in -->
 
-  <div class="col-sm-4 col-md-4 col-lg-4" ng-if="authData">
+  <div class="col-sm-4 col-md-4 col-lg-4" ng-show="authData.uid">
     <form class="form-horizontal" ng-submit="addMovie()" name="newMovie">
       <input type="text"
       class="form-control addMovie"
@@ -35,12 +37,12 @@
     </form>
   </div>
 
-  <div class="col-sm-2 col-md-2 col-lg-2" ng-if="authData.uid">
+  <div class="col-sm-2 col-md-2 col-lg-2" ng-show="authData.uid">
     <button type="button" class="btn btn-info btn-block" ng-click="logout()">Logout</button>
   </div>
 
   <div class="col-sm-2 col-md-2 col-lg-2" ng-show="authData.uid">
-    <button type="button" class="btn btn-info btn-block" ng-click="showAccount = !showAccount">Account</button>
+    <button type="button" class="btn btn-info btn-block" ng-click="openAccountModal('md')">Account</button>
   </div>
 
   <!-- Tech notes and resume -->
@@ -55,12 +57,6 @@
     </a>
   </div>
 
-</div>
-
-<!-- Modal window -->
-
-<div ng-controller="ModalDemoCtrl">
-  <button type="button" class="btn btn-default" ng-click="openModal('lg')">E-mail &amp; password</button>
 </div>
 
 <!-- E-mail & password login screens -->
