@@ -20,12 +20,14 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     metascore: false
   };
 
+
+
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
   $scope.movies = $firebaseArray(ref);
   $scope.movies.$loaded()
   .then(function(){
-    // $scope.movie = $scope.movies.$getRecord($routeParams.id);
-    $scope.movie = $firebaseObject(ref.child($routeParams.id));
+    $scope.movie = $scope.movies.$getRecord($routeParams.id);
+    // $scope.movieChild = $firebaseObject(ref.child($routeParams.id));
     console.log($scope.movie);
 
     $scope.movie.movieLikes = $firebaseObject(ref.child($routeParams.id).child('movieLikes'));
@@ -181,8 +183,8 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     movie.comments = comments; // saves new comment locally
     console.log($scope.movie);
     console.log($scope.movie.comments);
-    $scope.movie.$save().then(function() {
-    // $scope.movies.$save(movie).then(function() {
+    // $scope.movie.$save().then(function() {
+    $scope.movies.$save(movie).then(function() {
       console.log("Comment added!");
     }, function(error) {
       console.log("Error, comment not added.");
@@ -206,8 +208,8 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     movie.movieLikes += 1;
     console.log(movie);
     console.log($scope.movie.movieLikes);
-    $scope.movie.$save().then(function() {
-    // $scope.movies.$save(movie).then(function() {
+    // $scope.movie.$save().then(function() {
+    $scope.movies.$save(movie).then(function() {
       console.log("Upliked!");
     }, function(error) {
       console.log("Error, movie not upliked.");
@@ -217,16 +219,30 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   $scope.downLike = function(movie) {
     movie.movieLikes -= 1;
+    console.log(movie);
+    console.log($scope.movie.movieLikes);
+    // $scope.movie.$save().then(function() {
     $scope.movies.$save(movie).then(function() {
       console.log("Downliked!");
     }, function(error) {
-      console.log("Error, movie not downliked.");
+      console.log("Error, movie not upliked.");
       console.log(error);
     });
   };
 
+  // $scope.downLike = function(movie) {
+  //   movie.movieLikes -= 1;
+  //   $scope.movies.$save(movie).then(function() {
+  //     console.log("Downliked!");
+  //   }, function(error) {
+  //     console.log("Error, movie not downliked.");
+  //     console.log(error);
+  //   });
+  // };
+
   $scope.deleteMovie = function(movie) { // DESTROY
-    $scope.movies.$remove(movie).then(function() {
+    var index = $scope.movies.$indexFor(movie.$id); // finds index of the movie in the array of movies
+    $scope.movies.$remove(index).then(function() { // $firebaseArray $remove, not $firebaseObject $remove
       console.log("Movie deleted.");
       $location.path( "/movies" );
     }, function(error) {

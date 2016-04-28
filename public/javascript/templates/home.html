@@ -1,11 +1,9 @@
 <div class="row">
 
-  <ng-focus="logMe()">
-
   <!-- Login buttons -->
 
   <div class="col-sm-8 col-md-8 col-lg-8" ng-show="!authData.uid">
-    <span ng-if="!authData">Login with: </span>
+    <span ng-show="!authData">Login with: </span>
     <button type="button" class="btn btn-info" ng-click="loginGoogle()">Google</button>
     <button type="button" class="btn btn-info" ng-click="loginFacebook()">Facebook</button>
     <button type="button" class="btn btn-info" ng-click="loginTwitter()">Twitter</button>
@@ -28,7 +26,7 @@
       typeahead-min-length="3"
       typeahead-on-select="onSelect($item)"
       placeholder="Add the worst movie you've seen!"/>
-      <span class="glyphicon glyphicon-search form-control-feedback" ng-if="authData"></span>
+      <span class="glyphicon glyphicon-search form-control-feedback" ng-show="authData"></span>
       <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
       <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
       <div ng-show="noResults">
@@ -48,7 +46,7 @@
   <!-- Tech notes and resume -->
 
   <div class="col-sm-2 col-md-2 col-lg-2">
-    <button type="button" class="btn btn-danger btn-block" ng-click="techSummmary = !techSummmary">Tech Notes</button>
+    <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
   </div>
 
   <div class="col-sm-2 col-md-2 col-lg-2">
@@ -59,79 +57,19 @@
 
 </div>
 
-<!-- E-mail & password login screens -->
-
-<div class="row add12pxTop" ng-if="loginEmail.login">
-  <form>
-    <div class="form-group">
-      <label for="enterEmail">E-mail address</label>
-      <input type="email" ng-model="user.email" class="form-control" id="enterEmail" placeholder="E-mail address">
-    </div>
-    <div class="form-group">
-      <label for="enterPassword">Password</label>
-      <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
-    </div>
-    <input type="submit" ng-click="loginUser(user)" class="btn btn-default" value="Login" />
-    <input type="submit" ng-click="newUser(user)" class="btn btn-default" value="Create New User" />
-    <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
-  </form>
-
-  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-</div>
-
-
-
-
-<!-- Change e-mail address -->
-
-<div class="row add12pxTop">
-  <form ng-if="changeAddress">
-    <div class="form-group">
-      <label for="changeEmail">New e-mail address: </label>
-      <input type="email" ng-model="user.email" class="form-control" id="changeEmail" placeholder={{authData.password.email}}>
-    </div>
-    <div class="form-group">
-      <label for="enterPassword">Enter password: </label>
-      <input type="password" ng-model="user.password" class="form-control" id="enterPassword" placeholder="Password">
-    </div>
-    <input type="submit" ng-click="updateAddress(user)" class="btn btn-default" value="Update E-mail Address" />
-    <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
-  </form>
-
-  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-</div>
-
-<!-- Change password -->
-
-<div class="row add12pxTop">
-  <form ng-show="changePassword">
-    <div class="form-group">
-      <label for="changePassword">Old password: </label>
-      <input type="password" ng-model="user.oldPassword" class="form-control" id="changePassword" placeholder="Old password">
-    </div>
-    <div class="form-group">
-      <label for="enterPassword">New password: </label>
-      <input type="password" ng-model="user.newPassword" class="form-control" id="enterPassword" placeholder="New password">
-    </div>
-    <input type="submit" ng-click="updatePassword(user)" class="btn btn-default" value="Update Password" />
-    <input type="button" ng-click="reset()" class="btn btn-default" value="Reset" />
-  </form>
-
-  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-</div>
-
-
-
 <!-- Tech Notes row -->
 <div class="row well well-lg" ng-show="techSummary">
-  <p class="lead text-justify">MEAN stack CRUD app optimized for speed with Angular, Bootstrap, and async typeahead.</p>
-  <p class="text-justify">This is two apps, with separate back and front ends. The back end uses Node, Express, and MongoDB and is deployed on Heroku. The data is served to an API as JSON objects. MongoDB is accessed via the lightweight, schemaless Monk Node module.</p>
-  <p class="text-justify">The front end uses Angular and Bootstrap and is deployed on Firebase. There are three views: INDEX/NEW (Home), SHOW, and EDIT. The asynchronous typeahead reduces the typing required to add a new movie to a few keystrokes so a separate NEW view isn't needed.</p>
-  <p class="text-justify">The asynchronous typeahead is implemented with UI Boostrap. Each keystroke makes an HTTP request to the Open Movie Database, which returns ten movie titles. onSelect (clicking a movie title) fires an HTTP GET request for a single movie to the OMDB which returns the movie data. This movie is then pushed locally to the $scope.movies array. This updates the INDEX view almost instantly. Then, running in the background, an HTTP POST adds the movie to the CRUDiest Movies Database. Lastly, an HTTP GET request to the CRUDiest Movies Database gets all the movies and syncs to $scope. This is the slowest step but happens without the user's awareness.</p>
-  <p class="text-justify">The "Order By" buttons have ng-click set up with two values, <i>order</i> and <i>reverse</i>. These values are passed to the $scope and then to ng-repeat.</p>
+  <p class="lead text-justify">AngularFire CRUD app with AngularJS, Firebase, Bootstrap, and async typeahead.</p>
+  <p class="text-justify">This is a front-end app. Instead of a back-end it's accessing Firebase, a NoSQL cloud database. There are two views: INDEX/NEW (Home) and SHOW/EDIT. I also made a <a ng-href="https://crudiest-movies.firebaseapp.com/#/movies">MEAN stack</a> version of this app. The MEAN stack app lacks auth, has seperate SHOW and EDIT pages, and the EDIT pages has a &quot;Submit&quot; button. In contrast, the Firebase SHOW/EDIT page instantly saves user edits to the remote database without the need for a &quot;Submit&quot; button.</p>
+  <p class="text-justify">Auth is handled by Firebase. The Google, Facebook, Twitter, and GitHub logins are OAuth2. The e-mail &amp; password login opens a UI Bootstrap modal window, with UI Bootstrap alerts and UI Bootstrap tabs. The e-mail &amp; password login has a full feature set, including create new user, check for existing e-mail address, login, change e-mail address, change password, and reset lost password. Lastly, users can login anonymously.</p>
+  <p class="text-justify">Upon login, a "Add a Movie" data entry form shows. This form uses the UI Bootstrap asynchronous typeahead. Each keystroke makes an HTTP request to the Open Movie Database, which returns ten movie titles. onSelect (clicking a movie title) fires an HTTP GET request for a single movie to the OMDB which returns the movie data. This movie is then pushed locally to the $scope.movies array. This updates the INDEX view almost instantly. Then, running in the background, an HTTP POST adds the movie to the CRUDiest Movies Database. Lastly, an HTTP GET request to the CRUDiest Movies Database gets all the movies and syncs to $scope. This is the slowest step but happens without the user's awareness.</p>
+  <p class="text-justify">Users can order the movies by date added, rating, and year. The "Order By" buttons have ng-click set up with two values, <i>order</i> and <i>reverse</i>. These values are passed to the $scope and then to ng-repeat.</p>
   <p class="text-justify">The app is responsive. The number of movies displayed per row changes from five in the large view, to four in the medium view, three in the small view, and two on mobile devices.</p>
-  <p class="text-justify">On the SHOW page, comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons.</p>
-  <p class="text-justify">The <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Node-back-end">back end code</a> and <a ng-href="https://github.com/tdkehoe/CRUDiest-Movies-Database-Angular-Front-End">front end code</a> are on GitHub. Tutorials to make the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Node_and_Express.md">back end</a>, the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Angular_CRUD.md">front end</a>, and the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Typeahead.md">asynchronous typeahead</a> are also on GitHub.</p>
+  <p class="text-justify">Clicking on a movie routes the user to the SHOW/EDIT page.</p>
+
+    <!-- On the SHOW page, comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons. -->
+
+  <p class="text-justify">The <a ng-href="https://github.com/tdkehoe/CRUDiest-Firebase">repository</a> is on GitHub. I also wrote tutorials to make the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Firebase.md">Firebase app</a>, the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Firebase_Authorization.md">Firebase auth</a>, and the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Typeahead.md">asynchronous typeahead</a>.</p>
 </div>
 
 <!-- orderBy labels row -->
