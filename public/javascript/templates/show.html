@@ -284,13 +284,15 @@
 
 <div class="row visible-lg-block col-lg-6">   <!-- large view, left column -->
 
+  <!-- <div>You're logged in as: {{movie.authDataUID}}</div> -->
+
   <div class="row">
     <form class="form-horizontal" name="editMovie">
 
       <div class="form-group">
         <label for="editTitle" class="col-lg-2 control-label">Title: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="movie.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
           <div ng-show="watch.title" class="saved">Saved!</div>
@@ -353,7 +355,7 @@
           <input type="text" class="form-control" name="editActors" ng-model="movie.movieActors" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.actors" class="saved">Movie Actors Saved!</p>
+          <p ng-show="watch.actors" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -473,7 +475,8 @@
     <p class="text-justify">This large screen view combines the SHOW and EDIT views. You can edit the fields in the left column. The small screen views have seperate SHOW and EDIT pages.</p>
     <p class="text-justify">Edits are saved immediately to the remote database using Firebase three-way binding. No "Update" button is needed. To inform users that their edits have been saved the Firebase method $watch() is used. Each field has its own $watch() method, as opposed to watching the entire database for changes, which would trigger the "Saved!" message when other users add or edit other movies. The Angular service $timeout() is used to display the message for 9.9 seconds. A 10-second animation changes the opacity to make the message fade in and out.
     </p>
-    <p class="text-justify">Comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons.</p>
+    <p class="text-justify">Comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes.</p>
+    <p class="text-justify">To get a single movie object from the array of movies, one can use $firebaseArray to get the array of movies from the remote database and then use the Firebase method $getRecord(key) to get one movie from the array. Or one can use $firebaseObject(ref.child(key)) to get a single movie from the remote database. The two methods return similar movie objects, but with subtle differences. The likes/dislikes property is stored as a number in the remote database when all the other fields are strings. With $firebaseObject this property is a number in the returned movie object but strangely with $firebaseArray the number becomes an object, which can't be incremented. The left column show and edit functions only work with $firebaseArray, but the "Saved!" messages only work with $firebaseObject. The comments only work with $firebaseArray. Because of these differences I wrote the software to get the movie object twice from the remote database, with the objects on the $scope under different names. This results in a bug that the likes/dislikes are erased when you edit any of the fields that save automatically. My plan is to explore why Firebase returns different objects and refactor the code to work with a single movie object.</p>
   </div>
 
   <img class="moviePoster center-block" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}">
@@ -482,7 +485,7 @@
 
   <div class="row">
     <div class="likes col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <span>{{movieChild.movieLikes}}</span>
+      <span>{{movie.movieLikes}}</span>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <form ng-submit="upLike(movie)">
@@ -511,7 +514,7 @@
       </ng-pluralize><br />
     </span>
 
-    <div ng-hide="showComments" ng-repeat="comment in movie.comments">
+    <div ng-hide="showComments" ng-repeat="comment in movie.movieComments">
       <div class="row comment img-rounded">
         <div class="col-sm-8 col-md-8 col-lg-8">
           <span class="commentText">{{comment.commentText}}</span>
@@ -529,14 +532,14 @@
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-12">
-      <form class="form-horizontal" ng-submit="newComment(movie)">
+      <form class="form-horizontal" ng-submit="newComment(comment)">
         <div class="form-group">
           <label for="commentText">Your Comment: </label>
-          <input type="text" name="commentText" ng-model="movie.newComment.commentText" class="form-control" >
+          <input type="text" name="commentText" ng-model="comment.commentText" class="form-control" >
         </div>
         <div class="form-group">
           <label for="commentAuthor">Your Name: </label>
-          <input type="text" name="commentAuthor" ng-model="movie.newComment.commentAuthor" class="form-control" >
+          <input type="text" name="commentAuthor" ng-model="comment.commentAuthor" class="form-control" >
         </div>
         <div class="form-group">
           <button type="submit" class="form-control btn btn-info btn-block">Submit Comment</input>

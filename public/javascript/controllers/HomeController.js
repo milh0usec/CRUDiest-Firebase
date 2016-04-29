@@ -5,6 +5,9 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
 
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
   $scope.authObj = $firebaseAuth(ref);
+  var authData = $scope.authObj.$getAuth();
+  $scope.authData = authData;
+
   $scope.movies = $firebaseArray(ref);
   $scope.order = '$id';
   $scope.reverse = true;
@@ -27,10 +30,12 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
       var movie = {
         movieActors: response.data.Actors,
         movieAwards: response.data.Awards,
+        movieComments: [],
         movieCountry: response.data.Country,
         movieDirector: response.data.Director,
         movieGenre: response.data.Genre,
         movieLanguage: response.data.Language,
+        movieLikes: 0,
         movieMetascore: response.data.Metascore,
         moviePlot: response.data.Plot,
         moviePoster: response.data.Poster,
@@ -41,12 +46,10 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$fi
         movieYear: response.data.Year,
         movieImdbID: response.data.imdbID,
         movieImdbRating: response.data.imdbRating,
-        movieImdbVotes: response.data.imdbVotes,
-        movieLikes: 0
+        movieImdbVotes: response.data.imdbVotes
       };
       // reset orderBy so that new movie appears in upper left
       $scope.order = '$id'
-      $scope.reverse = true;
       $scope.movies.$add(movie);
       $scope.loading = false;
     });
