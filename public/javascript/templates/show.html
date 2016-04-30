@@ -292,10 +292,10 @@
       <div class="form-group">
         <label for="editTitle" class="col-lg-2 control-label">Title: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="movie.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="changeTitle(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <div ng-show="watch.title" class="saved">Saved!</div>
+          <div ng-show="watch.titleSave; watch.titleChange" class="saved">Saved!</div>
         </div>
       </div>
 

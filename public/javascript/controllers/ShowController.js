@@ -1,8 +1,10 @@
-app.controller('ShowController', ['$scope', '$routeParams', '$location', '$firebaseArray', '$firebaseObject', '$firebaseAuth', '$timeout', function($scope, $routeParams, $location, $firebaseArray, $firebaseObject, $firebaseAuth, $timeout) {
+app.controller('ShowController', ['$scope', '$routeParams', '$location', '$firebaseObject', '$firebaseAuth', '$timeout', function($scope, $routeParams, $location, $firebaseObject, $firebaseAuth, $timeout) {
   console.log("Show controller.");
 
-  $scope.watch = { // Initialize values
-    title: false,
+  // Initialize variables
+  $scope.watch = {
+    titleSave: false,
+    titleChange: false,
     poster: false,
     plot: false,
     trivia: false,
@@ -20,26 +22,39 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     metascore: false
   };
 
+  // Connect to Firebase
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
-  $scope.authObj = $firebaseAuth(ref);
-  var authData = $scope.authObj.$getAuth();
+
+  // Set up single movie object
   $scope.movie = $firebaseObject(ref.child($routeParams.id));
   console.log($scope.movie);
+  console.log($scope.watch.title)
 
-  // $scope.movies = $firebaseArray(ref);
-  // console.log($scope.movies);
-  // $scope.movies.$watch(function(event) { // Watch the array of all movies
+  // Set up auth
+  $scope.authObj = $firebaseAuth(ref);
+  var authData = $scope.authObj.$getAuth();
+
+  // Movie title "Saved!" message
+  $scope.movieTitleObject = $firebaseObject(ref.child($routeParams.id).child('movieTitle'));
+  $scope.movieTitleObject.$watch(function(event) { // Watch one property of one movie
+    $scope.watch.titleSave = true; // Show message
+    console.log("Object watch fired!");
+    $timeout(function() {
+      $scope.watch.titleSave = false; // Hide message
+    }, 9900);
+  });
+
+  $scope.changeTitle = function(movie) {
+    $scope.movie.$save(movie);
+    $scope.watch.titleChange = true; // Show message
+    console.log("Title change fired!");
+    $timeout(function() {
+      $scope.watch.titleChange = false; // Hide message
+    }, 9900);
+  };
 
 
-    movieTitleObject = $firebaseObject(ref.child($routeParams.id).child('movieTitle'));
-    movieTitleObject.$watch(function(event) { // Watch one property of one movie
-      $scope.watch.title = true; // Show message
-      $timeout(function() {
-        $scope.watch.title = false; // Hide message
-      }, 9900);
-    });
 
-  // });
 
 
   // $scope.movie.movieLikes = $scope.movie.child('movieLikes')); // Removing this line makes all the show fields not save
@@ -217,6 +232,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   //   });
   // });
 
+  // Comments section
   $scope.newComment = function(comment) { // full record is passed from the view
     console.log(comment);
     var commentObject = {
@@ -247,6 +263,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     });
   };
 
+  // Likes section
   $scope.upLike = function() {
     $scope.movie.movieLikes += 1;
     $scope.movie.$save().then(function() { // use with $firebaseObject
@@ -269,6 +286,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     });
   };
 
+  // Delete movie
   // This handler is for $firebaseObject
   $scope.deleteMovie = function() { // DESTROY
     $scope.movie.$remove().then(function() {

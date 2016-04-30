@@ -110,3 +110,7 @@ h1 {
 .add12pxTop {
   margin-top: 12px;
 }
+
+.form-control:hover {
+  outline: 2px solid blue;
+}
