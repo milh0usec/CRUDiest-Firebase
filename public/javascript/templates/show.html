@@ -292,7 +292,7 @@
       <div class="form-group">
         <label for="editTitle" class="col-lg-2 control-label">Title: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="changeTitle(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="change(movie, 'title')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
           <div ng-show="watch.titleSave; watch.titleChange" class="saved">Saved!</div>
@@ -302,150 +302,150 @@
       <div class="form-group">
         <label for="editPoster" class="col-lg-2 control-label">Poster: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editPoster" ng-model="movie.moviePoster" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editPoster" ng-model="movie.moviePoster" ng-change="change(movie, 'poster')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.poster" class="saved">Saved!</p>
+          <p ng-show="watch.posterSave; watch.posterChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editPlot" class="col-lg-2 control-label">Plot: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editPlot" ng-model="movie.moviePlot" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editPlot" ng-model="movie.moviePlot" ng-change="change(movie, 'plot')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.plot" class="saved">Saved!</p>
+          <p ng-show="watch.plotSave; watch.plotChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editTrivia" class="col-lg-2 control-label">Trivia: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editTrivia" ng-model="movie.movieTrivia" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editTrivia" ng-model="movie.movieTrivia" ng-change="change(movie, 'trivia')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.trivia" class="saved">Saved!</p>
+          <p ng-show="watch.triviaSave; watch.triviaChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editDirector" class="col-lg-2 control-label">Director: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editDirector" ng-model="movie.movieDirector" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editDirector" ng-model="movie.movieDirector" ng-change="change(movie, 'director')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.director" class="saved">Saved!</p>
+          <p ng-show="watch.directorSave; watch.directorChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editWriter" class="col-lg-2 control-label">Writer: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editWriter" ng-model="movie.movieWriter" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editWriter" ng-model="movie.movieWriter" ng-change="change(movie, 'writer')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.writer" class="saved">Saved!</p>
+          <p ng-show="watch.writerSave; watch.writerChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editActors" class="col-lg-2 control-label">Actors: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editActors" ng-model="movie.movieActors" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editActors" ng-model="movie.movieActors" ng-change="change(movie, 'actors')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.actors" class="saved">Saved!</p>
+          <p ng-show="watch.actorsSave; watch.actorsChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editYear" class="col-lg-2 control-label">Year: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editYear" ng-model="movie.movieYear" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editYear" ng-model="movie.movieYear" ng-change="change(movie, 'year')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.year" class="saved">Saved!</p>
+          <p ng-show="watch.yearSave; watch.yearChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editCountry" class="col-lg-2 control-label">Country: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editCountry" ng-model="movie.movieCountry" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editCountry" ng-model="movie.movieCountry" ng-change="change(movie, 'country')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.country" class="saved">Saved!</p>
+          <p ng-show="watch.countrySave; watch.countryChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editLanguage" class="col-lg-2 control-label">Language: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editLanguage" ng-model="movie.movieLanguage" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editLanguage" ng-model="movie.movieLanguage" ng-change="change(movie, 'language')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.language" class="saved">Saved!</p>
+          <p ng-show="watch.languageSave; watch.languageChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editGenre" class="col-lg-2 control-label">Genre: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editGenre" ng-model="movie.movieGenre" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editGenre" ng-model="movie.movieGenre" ng-change="change(movie, 'genre')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.genre" class="saved">Saved!</p>
+          <p ng-show="watch.genreSave; watch.genreChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editRated" class="col-lg-2 control-label">Rated: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editRated" ng-model="movie.movieRated" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editRated" ng-model="movie.movieRated" ng-change="change(movie, 'rated')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.rated" class="saved">Saved!</p>
+          <p ng-show="watch.ratedSave; watch.ratedChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editAwards" class="col-lg-2 control-label">Awards: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editAwards" ng-model="movie.movieAwards" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editAwards" ng-model="movie.movieAwards" ng-change="change(movie, 'awards')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.awards" class="saved">Saved!</p>
+          <p ng-show="watch.awardsSave; watch.awardsChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editIMDBRating" class="col-lg-2 control-label">IMDB Rating: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editIMDBRating" ng-model="movie.movieIMDBRating" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editIMDBRating" ng-model="movie.movieIMDBRating" ng-change="change(movie, 'imdbRating')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.imdbRating" class="saved">Saved!</p>
+          <p ng-show="watch.imdbRatingSave; watch.imdbRatingChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editIMDBVotes" class="col-lg-2 control-label">IMDB Votes: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editIMDBVotes" ng-model="movie.movieIMDBVotes" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editIMDBVotes" ng-model="movie.movieIMDBVotes" ng-change="change(movie, 'imdbVotes')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.imdbVotes" class="saved">Saved!</p>
+          <p ng-show="watch.imdbVotesSave; watch.imdbVotesChange" class="saved">Saved!</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="editMetascore" class="col-lg-2 control-label">Metascore: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editMetascore" ng-model="movie.movieMetascore" ng-change="movies.$save(movie)" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editMetascore" ng-model="movie.movieMetascore" ng-change="change(movie, 'metascore')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.metascore" class="saved">Saved!</p>
+          <p ng-show="watch.metascoreSave; watch.metascoreChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -473,10 +473,10 @@
   <!-- Tech Summary row -->
   <div class="row well well-lg" ng-show="techSummary">
     <p class="text-justify">This large screen view combines the SHOW and EDIT views. You can edit the fields in the left column. The small screen views have seperate SHOW and EDIT pages.</p>
-    <p class="text-justify">Edits are saved immediately to the remote database using Firebase three-way binding. No "Update" button is needed. To inform users that their edits have been saved the Firebase method $watch() is used. Each field has its own $watch() method, as opposed to watching the entire database for changes, which would trigger the "Saved!" message when other users add or edit other movies. The Angular service $timeout() is used to display the message for 9.9 seconds. A 10-second animation changes the opacity to make the message fade in and out.
-    </p>
+    <p class="text-justify">To get a single movie object from the array of movies, one can use $firebaseArray to get the array of movies from the remote database and then use the Firebase method $getRecord(key) to get one movie from the array. Or one can use $firebaseObject(ref.child(key)) to get a single movie from the remote database. The latter method is used on this page for improved performance and reliability.</p>
+    <p class="text-justify">Edits are saved immediately to the remote database using Firebase three-way binding. No "Update" button is needed. To inform users that their edits have been saved the Firebase method $watch() is used to display an animated "Saved!" message. This was one of the most challenging features to implement. Each field has its own $watch() method, as opposed to watching the entire database for changes, which would trigger the "Saved!" message when other users add or edit other movies. To stop the "Saved!" message from showing when the page loads the message shows only when two conditions are met, the user changing the field and the remote database changing. The Angular service $timeout() is used to display the message for 9.9 seconds. A 10-second animation changes the opacity to make the message fade in and out.</p>
+    <p class="text-justify">The like/dislike buttons are styled with glyphicons.</p>
     <p class="text-justify">Comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes.</p>
-    <p class="text-justify">To get a single movie object from the array of movies, one can use $firebaseArray to get the array of movies from the remote database and then use the Firebase method $getRecord(key) to get one movie from the array. Or one can use $firebaseObject(ref.child(key)) to get a single movie from the remote database. The two methods return similar movie objects, but with subtle differences. The likes/dislikes property is stored as a number in the remote database when all the other fields are strings. With $firebaseObject this property is a number in the returned movie object but strangely with $firebaseArray the number becomes an object, which can't be incremented. The left column show and edit functions only work with $firebaseArray, but the "Saved!" messages only work with $firebaseObject. The comments only work with $firebaseArray. Because of these differences I wrote the software to get the movie object twice from the remote database, with the objects on the $scope under different names. This results in a bug that the likes/dislikes are erased when you edit any of the fields that save automatically. My plan is to explore why Firebase returns different objects and refactor the code to work with a single movie object.</p>
   </div>
 
   <img class="moviePoster center-block" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}">
