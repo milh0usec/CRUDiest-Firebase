@@ -1,8 +1,9 @@
+<!-- Large view login, tech notes, resume -->
 <div class="row">
 
   <!-- Login buttons -->
 
-  <div class="col-sm-8 col-md-8 col-lg-8" ng-show="!authData.uid">
+  <div class="col-lg-8" ng-show="!authData.uid">
     <span ng-show="!authData">Login with: </span>
     <button type="button" class="btn btn-info" ng-click="loginGoogle()">Google</button>
     <button type="button" class="btn btn-info" ng-click="loginFacebook()">Facebook</button>
@@ -14,7 +15,7 @@
 
   <!-- When user is logged in -->
 
-  <div class="col-sm-4 col-md-4 col-lg-4" ng-show="authData.uid">
+  <div class="col-lg-4" ng-show="authData.uid">
     <form class="form-horizontal" ng-submit="addMovie()" name="newMovie">
       <input type="text"
       class="form-control addMovie"
@@ -35,21 +36,21 @@
     </form>
   </div>
 
-  <div class="col-sm-2 col-md-2 col-lg-2" ng-show="authData.uid">
+  <div class="col-lg-2" ng-show="authData.uid">
     <button type="button" class="btn btn-info btn-block" ng-click="logout()">Logout</button>
   </div>
 
-  <div class="col-sm-2 col-md-2 col-lg-2" ng-show="authData.uid">
+  <div class="col-lg-2" ng-show="authData.uid">
     <button type="button" class="btn btn-info btn-block" ng-click="openAccountModal('md')">Account</button>
   </div>
 
   <!-- Tech notes and resume -->
 
-  <div class="col-sm-2 col-md-2 col-lg-2">
+  <div class="col-sm-6 col-md-6 col-lg-2">
     <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
   </div>
 
-  <div class="col-sm-2 col-md-2 col-lg-2">
+  <div class="col-sm-6 col-md-6 col-lg-2">
     <a target="_self" href="../../resume/T-D-Kehoe.pdf" download="T-D-Kehoe.pdf" class="resume">
       <button type="button" class="btn btn-danger btn-block">Résumé</button>
     </a>
@@ -60,14 +61,12 @@
 <!-- Tech Notes row -->
 <div class="row well well-lg" ng-show="techSummary">
   <p class="lead text-justify">AngularFire CRUD app with AngularJS, Firebase, Bootstrap, and async typeahead.</p>
-  <p class="text-justify">This is a front-end app. Instead of a back-end it's accessing Firebase, a NoSQL cloud database. There are two views: INDEX/NEW (Home) and SHOW/EDIT. I also made a <a ng-href="https://crudiest-movies.firebaseapp.com/#/movies">MEAN stack</a> version of this app. The MEAN stack app lacks auth, has seperate SHOW and EDIT pages, and the EDIT pages has a &quot;Submit&quot; button. In contrast, the Firebase SHOW/EDIT page instantly saves user edits to the remote database without the need for a &quot;Submit&quot; button.</p>
+  <p class="text-justify">This front-end app accesses Firebase, a NoSQL cloud database. There's no traditional back-end. I also made a more conventional <a ng-href="https://crudiest-movies.firebaseapp.com/#/movies">MEAN stack</a> version of this app with a Node/Express/MongoDB back-end. This Firebase version has several features that the MEAN stack app lacks. The Firebase version has authorization/authentication, and it has three-way data binding. When users edit the data, the changes are saved immediately to the remote database without the user clicking a "Submit" button. Additionally, when multiple users use the app at the same time, movies added by one user, or edits made one user, appear instantly in the other users' apps.</p>
   <p class="text-justify">Auth is handled by Firebase. The Google, Facebook, Twitter, and GitHub logins are OAuth2. The e-mail &amp; password login opens a UI Bootstrap modal window, with UI Bootstrap alerts and UI Bootstrap tabs. The e-mail &amp; password login has a full feature set, including create new user, check for existing e-mail address, login, change e-mail address, change password, and reset lost password. Lastly, users can login anonymously.</p>
   <p class="text-justify">Upon login, a "Add a Movie" data entry form shows. This form uses the UI Bootstrap asynchronous typeahead. Each keystroke makes an HTTP request to the Open Movie Database, which returns ten movie titles. onSelect (clicking a movie title) fires an HTTP GET request for a single movie to the OMDB which returns the movie data. This movie is then pushed locally to the $scope.movies array. This updates the INDEX view almost instantly. Then, running in the background, an HTTP POST adds the movie to the CRUDiest Movies Database. Lastly, an HTTP GET request to the CRUDiest Movies Database gets all the movies and syncs to $scope. This is the slowest step but happens without the user's awareness.</p>
+  <p class="text-justify">Routes are authorized so logged-in users can click on any movie and go ton the SHOW/EDIT view, but users who are not logged-in are redirected back to the home page.</p>
   <p class="text-justify">Users can order the movies by date added, rating, and year. The "Order By" buttons have ng-click set up with two values, <i>order</i> and <i>reverse</i>. These values are passed to the $scope and then to ng-repeat.</p>
   <p class="text-justify">The app is responsive. The number of movies displayed per row changes from five in the large view, to four in the medium view, three in the small view, and two on mobile devices.</p>
-  <p class="text-justify">Clicking on a movie routes the user to the SHOW/EDIT page.</p>
-
-    <!-- On the SHOW page, comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes. The likes/dislikes buttons use glyphicons. -->
 
   <p class="text-justify">The <a ng-href="https://github.com/tdkehoe/CRUDiest-Firebase">repository</a> is on GitHub. I also wrote tutorials to make the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Firebase.md">Firebase app</a>, the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Firebase_Authorization.md">Firebase auth</a>, and the <a ng-href="https://github.com/tdkehoe/Learn-To-Code-By-Breaking-Stuff/blob/master/Typeahead.md">asynchronous typeahead</a>.</p>
 </div>

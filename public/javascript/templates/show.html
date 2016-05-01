@@ -1,292 +1,6 @@
-<div class="row visible-xs-block">   <!-- mobile view -->
+<div class="row">   <!-- large view -->
 
-  <table class="table">
-    <tr>
-      <td class="tableLabel">Movie Title:</td>
-      <td class="tableData">{{movie.movieTitle}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Plot:</td>
-      <td class="tableData">{{movie.moviePlot}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Year:</td>
-      <td class="tableData">{{movie.movieYear}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Director:</td>
-      <td class="tableData">{{movie.movieDirector}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Writer:</td>
-      <td class="tableData">{{movie.movieWriter}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Actors:</td>
-      <td class="tableData">{{movie.movieActors}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Country:</td>
-      <td class="tableData">{{movie.movieCountry}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Language:</td>
-      <td class="tableData">{{movie.movieLanguage}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Trivia:</td>
-      <td class="tableData">{{movie.movieTrivia}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Genre:</td>
-      <td class="tableData">{{movie.movieGenre}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Rated:</td>
-      <td class="tableData">{{movie.movieRated}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Awards:</td>
-      <td class="tableData">{{movie.movieAwards}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">IMDB Rating:</td>
-      <td class="tableData">{{movie.movieImdbRating}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">IMDB Votes:</td>
-      <td class="tableData">{{movie.movieVotes}}</td>
-    </tr>
-    <tr>
-      <td class="tableLabel">Metascore:</td>
-      <td class="tableData">{{movie.movieMetascore}}</td>
-    </tr>
-  </table>
-
-  <a href="/#/movies/{{movie.$id}}/edit"><button type="button" class="btn btn-primary btn-block">Edit Movie</button></a><br />
-
-  <button type="button" ng-click="deleteMovie(movie)" class="btn btn-danger btn-block">Delete Movie</button>
-
-  <hr />
-
-  <div class="row">
-    <div class="likes col-xs-6">
-      <span>{{movie.movieLikes}}</span>
-    </div>
-    <div class="col-xs-6">
-      <form ng-submit="upLike(movie)">
-        <button type="submit" class="btn btn-success btn-lg">
-          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-        </button>
-      </form>
-      <form ng-submit="downLike(movie)">
-        <button type="submit" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <hr />
-
-  <span ng-click="showComments = !showComments" class="showComments" data-toggle="tooltip" data-placement="top" title="Click to show or hide comments.">
-    <ng-pluralize count="movie.comments.length"
-    when="{'0': '',
-    'one': '1 Comment',
-    'other': '{} Comments',
-    'NaN': ''}">
-  </ng-pluralize><br />
-</span>
-
-<div ng-hide="showComments" ng-repeat="comment in movie.comments">
-  <div class="row comment img-rounded">
-    <div class="col-xs-8">
-      <span class="commentText">{{comment.commentText}}</span>
-      <div class="commentAuthor">
-        <span>&#151;{{comment.commentAuthor}}, </span>
-        <span>{{comment.commentTimestamp | date:'mediumDate'}}</span>
-      </div>
-    </div>
-    <div class="col-xs-4">
-      <form ng-submit="deleteComment(movie, comment)">
-        <button type="submit" class="btn btn-warning btn-sm">Delete Comment</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div class="col-xs-12">
-  <form class="form-horizontal" ng-submit="newComment(movie)">
-    <div class="form-group">
-      <label for="commentText">Your Comment: </label>
-      <input type="text" name="commentText" ng-model="movie.newComment.commentText" class="form-control" >
-    </div>
-    <div class="form-group">
-      <label for="commentAuthor">Your Name: </label>
-      <input type="text" name="commentAuthor" ng-model="movie.newComment.commentAuthor" class="form-control" >
-    </div>
-    <div class="form-group">
-      <button type="submit" class="form-control btn btn-info btn-block">Submit Comment</input>
-      </div>
-    </form>
-  </div>
-
-  <img class="moviePoster center-block" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"><br />
-
-</div> <!-- end of mobile view -->
-
-<div class="row visible-sm-block visible-md-block">   <!-- small and medium views -->
-
-  <div class="col-sm-6 col-md-6">
-
-    <table class="table">
-      <tr>
-        <td class="tableLabel">Movie Title:</td>
-        <td class="tableData">{{movie.movieTitle}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Plot:</td>
-        <td class="tableData">{{movie.moviePlot}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Year:</td>
-        <td class="tableData">{{movie.movieYear}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Director:</td>
-        <td class="tableData">{{movie.movieDirector}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Writer:</td>
-        <td class="tableData">{{movie.movieWriter}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Actors:</td>
-        <td class="tableData">{{movie.movieActors}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Country:</td>
-        <td class="tableData">{{movie.movieCountry}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Language:</td>
-        <td class="tableData">{{movie.movieLanguage}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Trivia:</td>
-        <td class="tableData">{{movie.movieTrivia}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Genre:</td>
-        <td class="tableData">{{movie.movieGenre}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Rated:</td>
-        <td class="tableData">{{movie.movieRated}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Awards:</td>
-        <td class="tableData">{{movie.movieAwards}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">IMDB Rating:</td>
-        <td class="tableData">{{movie.movieImdbRating}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">IMDB Votes:</td>
-        <td class="tableData">{{movie.movieVotes}}</td>
-      </tr>
-      <tr>
-        <td class="tableLabel">Metascore:</td>
-        <td class="tableData">{{movie.movieMetascore}}</td>
-      </tr>
-    </table>
-
-    <a href="/#/movies/{{movie.$id}}/edit"><button type="button" class="btn btn-primary btn-block">Edit Movie</button></a><br />
-
-    <button type="button" ng-click="deleteMovie(movie)" class="btn btn-danger btn-block">Delete Movie</button>
-
-    <hr />
-
-    <div class="row">
-      <div class="likes col-sm-6 col-md-6 col-lg-6">
-        <span>{{movie.movieLikes}}</span>
-      </div>
-      <div class="col-sm-6 col-md-6 col-lg-6">
-        <form ng-submit="upLike(movie)">
-          <button type="submit" class="btn btn-success btn-lg">
-            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-          </button>
-        </form>
-        <form ng-submit="downLike(movie)">
-          <button type="submit" class="btn btn-danger btn-lg">
-            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <span ng-click="showComments = !showComments" class="showComments" data-toggle="tooltip" data-placement="top" title="Click to show or hide comments.">
-          <ng-pluralize count="movie.comments.length"
-          when="{'0': '',
-          'one': '1 Comment',
-          'other': '{} Comments',
-          'NaN': ''}">
-        </ng-pluralize><br />
-      </span>
-
-      <div ng-hide="showComments" ng-repeat="comment in movie.comments">
-        <div class="row comment img-rounded">
-          <div class="col-sm-8 col-md-8 col-lg-8">
-            <span class="commentText">{{comment.commentText}}</span>
-            <div class="commentAuthor">
-              <span>&#151;{{comment.commentAuthor}}, </span>
-              <span>{{comment.commentTimestamp | date:'mediumDate'}}</span>
-            </div>
-          </div>
-          <div class="col-sm-4 col-md-4 col-lg-4">
-            <form ng-submit="deleteComment(movie, comment)">
-              <button type="submit" class="btn btn-warning btn-sm">Delete Comment</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <form class="form-horizontal" ng-submit="newComment(movie)">
-          <div class="form-group">
-            <label for="commentText">Your Comment: </label>
-            <input type="text" name="commentText" ng-model="movie.newComment.commentText" class="form-control" >
-          </div>
-          <div class="form-group">
-            <label for="commentAuthor">Your Name: </label>
-            <input type="text" name="commentAuthor" ng-model="movie.newComment.commentAuthor" class="form-control" >
-          </div>
-          <div class="form-group">
-            <button type="submit" class="form-control btn btn-info btn-block">Submit Comment</input>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col-sm-6 col-md-6">
-    <img class="moviePoster" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}"><br />
-  </div>
-
-</div> <!-- end of small and medium views -->
-
-<div class="row visible-lg-block col-lg-6">   <!-- large view, left column -->
-
-  <!-- <div>You're logged in as: {{movie.authDataUID}}</div> -->
-
-  <div class="row">
+  <div class="col-lg-6"> <!-- left column -->
     <form class="form-horizontal" name="editMovie">
 
       <div class="form-group">
@@ -456,97 +170,99 @@
       <div class="form-group">
         <label for="deleteMovie" class="col-sm-2 control-label"></label>
         <div class="col-sm-8">
-          <button type="button" name="deleteMovie" ng-click="deleteMovie(movie)" class="form-control btn btn-danger">Delete Movie</button>
+          <button type="button" name="deleteMovie" ng-click="deleteMovie(movie)" class="form-control btn btn-danger btn-block">Delete Movie</button>
         </div>
       </div>
 
     </form>
-  </div>
 
-</div> <!-- end left column -->
 
-<div class="col-lg-6"> <!-- right column -->
+  </div> <!-- end left column -->
 
-  <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
-  <br />
+  <div class="col-lg-6"> <!-- right column -->
 
-  <!-- Tech Summary row -->
-  <div class="row well well-lg" ng-show="techSummary">
-    <p class="text-justify">This large screen view combines the SHOW and EDIT views. You can edit the fields in the left column. The small screen views have seperate SHOW and EDIT pages.</p>
-    <p class="text-justify">To get a single movie object from the array of movies, one can use $firebaseArray to get the array of movies from the remote database and then use the Firebase method $getRecord(key) to get one movie from the array. Or one can use $firebaseObject(ref.child(key)) to get a single movie from the remote database. The latter method is used on this page for improved performance and reliability.</p>
-    <p class="text-justify">Edits are saved immediately to the remote database using Firebase three-way binding. No "Update" button is needed. To inform users that their edits have been saved the Firebase method $watch() is used to display an animated "Saved!" message. This was one of the most challenging features to implement. Each field has its own $watch() method, as opposed to watching the entire database for changes, which would trigger the "Saved!" message when other users add or edit other movies. To stop the "Saved!" message from showing when the page loads the message shows only when two conditions are met, the user changing the field and the remote database changing. The Angular service $timeout() is used to display the message for 9.9 seconds. A 10-second animation changes the opacity to make the message fade in and out.</p>
-    <p class="text-justify">The like/dislike buttons are styled with glyphicons.</p>
-    <p class="text-justify">Comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes.</p>
-  </div>
+    <button type="button" class="btn btn-danger btn-block" ng-click="techSummary = !techSummary">Tech Notes</button>
+    <br />
 
-  <img class="moviePoster center-block" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}">
-
-  <hr />
-
-  <div class="row">
-    <div class="likes col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <span>{{movie.movieLikes}}</span>
+    <!-- Tech Summary row -->
+    <div class="row well well-lg" ng-show="techSummary">
+      <p class="text-justify">This large screen view combines the SHOW and EDIT views. You can edit the fields in the left column. The small screen views have seperate SHOW and EDIT pages.</p>
+      <p class="text-justify">To get a single movie object from the array of movies, one can use $firebaseArray to get the array of movies from the remote database and then use the Firebase method $getRecord(key) to get one movie from the array. Or one can use $firebaseObject(ref.child(key)) to get a single movie from the remote database. The latter method is used on this page for improved performance and reliability.</p>
+      <p class="text-justify">Edits are saved immediately to the remote database using Firebase three-way binding. No "Update" button is needed. To inform users that their edits have been saved the Firebase method $watch() is used to display an animated "Saved!" message. This was one of the most challenging features to implement. Each field has its own $watch() method, as opposed to watching the entire database for changes, which would trigger the "Saved!" message when other users add or edit other movies. To hide the "Saved!" message when the page loads the message shows only when two conditions are met, the user changing the field and the remote database changing. The Angular service $timeout() is used to display the message for 9.9 seconds. A 10-second animation changes the opacity to make the message fade in and out.</p>
+      <p class="text-justify">The Firebase remote database is set with security rules to allow only logged-in users to write data.</p>
+      <p class="text-justify">The like/dislike buttons are styled with glyphicons.</p>
+      <p class="text-justify">Comments are an array of objects nested in the movie object. This is easy with the NoSQL database but would be more work with an SQL database. The "number of comments display" hides and shows the comments when clicked. A tooltip informs users of this feature. The number of comments pluralizes.</p>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <form ng-submit="upLike(movie)">
-        <button type="submit" class="btn btn-success btn-lg">
-          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-        </button>
-      </form>
-      <form ng-submit="downLike(movie)">
-        <button type="submit" class="btn btn-danger btn-lg">
-          <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-        </button>
-      </form>
+
+    <img class="moviePoster center-block" ng-src="{{movie.moviePoster}}" alt="{{movie.movieTitle}}">
+
+    <hr />
+
+    <div class="row">
+      <div class="likes col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <span>{{movie.movieLikes}}</span>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <form ng-submit="upLike(movie)">
+          <button type="submit" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+          </button>
+        </form>
+        <form ng-submit="downLike(movie)">
+          <button type="submit" class="btn btn-danger btn-lg">
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <hr />
+    <hr />
 
-  <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <span ng-click="showComments = !showComments" class="showComments" data-toggle="tooltip" data-placement="top" title="Click to show or hide comments.">
-        <ng-pluralize count="movie.comments.length"
-        when="{'0': '',
-        'one': '1 Comment',
-        'other': '{} Comments',
-        'NaN': ''}">
-      </ng-pluralize><br />
-    </span>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <span ng-click="showComments = !showComments" class="showComments" data-toggle="tooltip" data-placement="top" title="Click to show or hide comments.">
+          <ng-pluralize count="movie.comments.length"
+          when="{'0': '',
+          'one': '1 Comment',
+          'other': '{} Comments',
+          'NaN': ''}">
+        </ng-pluralize><br />
+      </span>
 
-    <div ng-hide="showComments" ng-repeat="comment in movie.movieComments">
-      <div class="row comment img-rounded">
-        <div class="col-sm-8 col-md-8 col-lg-8">
-          <span class="commentText">{{comment.commentText}}</span>
-          <div class="commentAuthor">
-            <span>&#151;{{comment.commentAuthor}}, </span>
-            <span>{{comment.commentTimestamp | date:'mediumDate'}}</span>
+      <div ng-hide="showComments" ng-repeat="comment in movie.movieComments">
+        <div class="row comment img-rounded">
+          <div class="col-sm-8 col-md-8 col-lg-8">
+            <span class="commentText">{{comment.commentText}}</span>
+            <div class="commentAuthor">
+              <span>&#151;{{comment.commentAuthor}}, </span>
+              <span>{{comment.commentTimestamp | date:'mediumDate'}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <form ng-submit="deleteComment(movie, comment)">
+              <button type="submit" class="btn btn-warning btn-sm">Delete Comment</button>
+            </form>
           </div>
         </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-          <form ng-submit="deleteComment(movie, comment)">
-            <button type="submit" class="btn btn-warning btn-sm">Delete Comment</button>
+      </div>
+
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" ng-submit="newComment(comment)">
+          <div class="form-group">
+            <label for="commentText">Your Comment: </label>
+            <input type="text" name="commentText" ng-model="comment.commentText" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label for="commentAuthor">Your Name: </label>
+            <input type="text" name="commentAuthor" ng-model="comment.commentAuthor" class="form-control" >
+          </div>
+          <div class="form-group">
+            <button type="submit" class="form-control btn btn-info btn-block">Submit Comment</input>
+            </div>
           </form>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <form class="form-horizontal" ng-submit="newComment(comment)">
-        <div class="form-group">
-          <label for="commentText">Your Comment: </label>
-          <input type="text" name="commentText" ng-model="comment.commentText" class="form-control" >
-        </div>
-        <div class="form-group">
-          <label for="commentAuthor">Your Name: </label>
-          <input type="text" name="commentAuthor" ng-model="comment.commentAuthor" class="form-control" >
-        </div>
-        <div class="form-group">
-          <button type="submit" class="form-control btn btn-info btn-block">Submit Comment</input>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-</div>
+  </div> <!-- end right column -->
+</div> <!-- end large view -->
