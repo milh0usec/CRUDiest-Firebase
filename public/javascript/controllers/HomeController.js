@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$location', '$firebaseArray', '$firebaseAuth', '$uibModal', function($scope, $http, $route, $location, $firebaseArray, $firebaseAuth, $uibModal) {
+app.controller('HomeController', ['$scope', '$http', '$route', '$firebaseArray', '$firebaseAuth', '$uibModal', function($scope, $http, $route, $firebaseArray, $firebaseAuth, $uibModal) {
   console.log("Home controller.");
   $scope.loading = true;
 

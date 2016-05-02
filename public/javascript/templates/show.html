@@ -136,7 +136,7 @@
       <div class="form-group">
         <label for="editIMDBRating" class="col-lg-2 control-label">IMDB Rating: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editIMDBRating" ng-model="movie.movieIMDBRating" ng-change="change(movie, 'imdbRating')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editIMDBRating" ng-model="movie.movieImdbRating" ng-change="change(movie, 'imdbRating')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
           <p ng-show="watch.imdbRatingSave; watch.imdbRatingChange" class="saved">Saved!</p>
@@ -146,7 +146,7 @@
       <div class="form-group">
         <label for="editIMDBVotes" class="col-lg-2 control-label">IMDB Votes: </label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" name="editIMDBVotes" ng-model="movie.movieIMDBVotes" ng-change="change(movie, 'imdbVotes')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
+          <input type="text" class="form-control" name="editIMDBVotes" ng-model="movie.movieImdbVotes" ng-change="change(movie, 'imdbVotes')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
           <p ng-show="watch.imdbVotesSave; watch.imdbVotesChange" class="saved">Saved!</p>
@@ -221,7 +221,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
         <span ng-click="showComments = !showComments" class="showComments" data-toggle="tooltip" data-placement="top" title="Click to show or hide comments.">
-          <ng-pluralize count="movie.comments.length"
+          <ng-pluralize count="movie.movieComments.length"
           when="{'0': '',
           'one': '1 Comment',
           'other': '{} Comments',

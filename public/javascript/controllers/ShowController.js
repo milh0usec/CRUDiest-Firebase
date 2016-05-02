@@ -189,6 +189,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   // Comments section
   $scope.newComment = function(comment) { // full record is passed from the view
     console.log(comment);
+    console.log($scope.movie.movieComments);
     var commentObject = {
       commentText: comment.commentText,
       commentAuthor: comment.commentAuthor,
