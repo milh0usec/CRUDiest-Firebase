@@ -1,7 +1,6 @@
-app.controller('HomeController', ['$scope', '$http', '$route', '$firebaseArray', '$firebaseAuth', '$uibModal', function($scope, $http, $route, $firebaseArray, $firebaseAuth, $uibModal) {
+app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebaseAuth', '$uibModal', function($scope, $http, $firebaseArray, $firebaseAuth, $uibModal) {
   console.log("Home controller.");
   $scope.loading = true;
-
 
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
   $scope.authObj = $firebaseAuth(ref);
@@ -46,7 +45,8 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$firebaseArray',
         movieYear: response.data.Year,
         movieImdbID: response.data.imdbID,
         movieImdbRating: response.data.imdbRating,
-        movieImdbVotes: response.data.imdbVotes
+        movieImdbVotes: response.data.imdbVotes,
+        movieDateAdded: Date.now()
       };
       // reset orderBy so that new movie appears in upper left
       $scope.order = '$id'
@@ -60,7 +60,6 @@ app.controller('HomeController', ['$scope', '$http', '$route', '$firebaseArray',
     $scope.error = null;
     $scope.authObj.$authAnonymously().then(function(authData) {
       $scope.authData = authData;
-      console.log($scope.authData.uid);
     }).catch(function(error) {
       $scope.error = error;
       console.log($scope.error);

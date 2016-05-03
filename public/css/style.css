@@ -37,18 +37,8 @@ h1 {
   padding-top: 3px;
 }
 
-.largeMoviePoster:hover {
+.extraSmallMoviePoster:hover, .smallMoviePoster:hover, .mediumMoviePoster:hover, .largeMoviePoster:hover {
   outline: 5px solid blue;
-  /*-ms-transform: rotate(-10deg);
-  -webkit-transform: rotate(-10deg);
-  -moz-transform: rotate(-10deg);
-  -o-transform: rotate(-10deg);
-  transform: rotate(-10deg);*/
-}
-
-.colophon {
-  background-color: black;
-  color: white;
 }
 
 .moviePoster {
@@ -87,7 +77,7 @@ h1 {
 }
 
 .saved {
-  padding-top: 3px
+  padding-top: 4px;
   color: green;
 }
 

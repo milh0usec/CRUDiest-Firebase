@@ -42,6 +42,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   // Set up single movie object
   $scope.movie = $firebaseObject(ref.child($routeParams.id));
+  console.log($scope.movie);
 
   // Set up auth
   $scope.authObj = $firebaseAuth(ref);
@@ -236,7 +237,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
       // $scope.movies.$save(movie).then(function() { // use with $firebaseArray
       console.log("Downliked!");
     }, function(error) {
-      console.log("Error, movie not upliked.");
+      console.log("Error, movie not downliked.");
       console.log(error);
     });
   };

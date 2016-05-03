@@ -1,4 +1,4 @@
-<div class="row">   <!-- large view -->
+<div class="row">
 
   <div class="col-lg-6"> <!-- left column -->
     <form class="form-horizontal" name="editMovie">
@@ -9,7 +9,7 @@
           <input type="text" class="form-control" name="editTitle" ng-model="movie.movieTitle" ng-change="change(movie, 'title')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <div ng-show="watch.titleSave; watch.titleChange" class="saved">Saved!</div>
+          <div ng-show="watch.titleSave && watch.titleChange" class="saved">Saved!</div>
         </div>
       </div>
 
@@ -19,7 +19,7 @@
           <input type="text" class="form-control" name="editPoster" ng-model="movie.moviePoster" ng-change="change(movie, 'poster')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.posterSave; watch.posterChange" class="saved">Saved!</p>
+          <p ng-show="watch.posterSave && watch.posterChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
           <input type="text" class="form-control" name="editPlot" ng-model="movie.moviePlot" ng-change="change(movie, 'plot')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.plotSave; watch.plotChange" class="saved">Saved!</p>
+          <p ng-show="watch.plotSave && watch.plotChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
           <input type="text" class="form-control" name="editTrivia" ng-model="movie.movieTrivia" ng-change="change(movie, 'trivia')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.triviaSave; watch.triviaChange" class="saved">Saved!</p>
+          <p ng-show="watch.triviaSave && watch.triviaChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
           <input type="text" class="form-control" name="editDirector" ng-model="movie.movieDirector" ng-change="change(movie, 'director')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.directorSave; watch.directorChange" class="saved">Saved!</p>
+          <p ng-show="watch.directorSave && watch.directorChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           <input type="text" class="form-control" name="editWriter" ng-model="movie.movieWriter" ng-change="change(movie, 'writer')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.writerSave; watch.writerChange" class="saved">Saved!</p>
+          <p ng-show="watch.writerSave && watch.writerChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -69,7 +69,7 @@
           <input type="text" class="form-control" name="editActors" ng-model="movie.movieActors" ng-change="change(movie, 'actors')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.actorsSave; watch.actorsChange" class="saved">Saved!</p>
+          <p ng-show="watch.actorsSave && watch.actorsChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@
           <input type="text" class="form-control" name="editYear" ng-model="movie.movieYear" ng-change="change(movie, 'year')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.yearSave; watch.yearChange" class="saved">Saved!</p>
+          <p ng-show="watch.yearSave && watch.yearChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -89,7 +89,7 @@
           <input type="text" class="form-control" name="editCountry" ng-model="movie.movieCountry" ng-change="change(movie, 'country')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.countrySave; watch.countryChange" class="saved">Saved!</p>
+          <p ng-show="watch.countrySave && watch.countryChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -99,7 +99,7 @@
           <input type="text" class="form-control" name="editLanguage" ng-model="movie.movieLanguage" ng-change="change(movie, 'language')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.languageSave; watch.languageChange" class="saved">Saved!</p>
+          <p ng-show="watch.languageSave && watch.languageChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -109,7 +109,7 @@
           <input type="text" class="form-control" name="editGenre" ng-model="movie.movieGenre" ng-change="change(movie, 'genre')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.genreSave; watch.genreChange" class="saved">Saved!</p>
+          <p ng-show="watch.genreSave && watch.genreChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -119,7 +119,7 @@
           <input type="text" class="form-control" name="editRated" ng-model="movie.movieRated" ng-change="change(movie, 'rated')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.ratedSave; watch.ratedChange" class="saved">Saved!</p>
+          <p ng-show="watch.ratedSave && watch.ratedChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -129,7 +129,7 @@
           <input type="text" class="form-control" name="editAwards" ng-model="movie.movieAwards" ng-change="change(movie, 'awards')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.awardsSave; watch.awardsChange" class="saved">Saved!</p>
+          <p ng-show="watch.awardsSave && watch.awardsChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -139,7 +139,7 @@
           <input type="text" class="form-control" name="editIMDBRating" ng-model="movie.movieImdbRating" ng-change="change(movie, 'imdbRating')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.imdbRatingSave; watch.imdbRatingChange" class="saved">Saved!</p>
+          <p ng-show="watch.imdbRatingSave && watch.imdbRatingChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -149,7 +149,7 @@
           <input type="text" class="form-control" name="editIMDBVotes" ng-model="movie.movieImdbVotes" ng-change="change(movie, 'imdbVotes')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.imdbVotesSave; watch.imdbVotesChange" class="saved">Saved!</p>
+          <p ng-show="watch.imdbVotesSave && watch.imdbVotesChange" class="saved">Saved!</p>
         </div>
       </div>
 
@@ -159,23 +159,23 @@
           <input type="text" class="form-control" name="editMetascore" ng-model="movie.movieMetascore" ng-change="change(movie, 'metascore')" tooltip-placement="top-left" uib-tooltip="You can type in this field"></label>
         </div>
         <div class="col-lg-2">
-          <p ng-show="watch.metascoreSave; watch.metascoreChange" class="saved">Saved!</p>
+          <p ng-show="watch.metascoreSave && watch.metascoreChange" class="saved">Saved!</p>
         </div>
       </div>
 
-      <div>
-        <input type="hidden" name="hiddenField" />
-      </div>
-
       <div class="form-group">
-        <label for="deleteMovie" class="col-sm-2 control-label"></label>
+        <div class="col-lg-2">
+          <p>&nbsp;</p>
+        </div>
         <div class="col-sm-8">
-          <button type="button" name="deleteMovie" ng-click="deleteMovie(movie)" class="form-control btn btn-danger btn-block">Delete Movie</button>
+          <button type="button" name="deleteMovie" ng-click="deleteMovie()" class="form-control btn btn-danger btn-block">Delete Movie</button>
+        </div>
+        <div class="col-lg-2">
+          <p>&nbsp;</p>
         </div>
       </div>
 
     </form>
-
 
   </div> <!-- end left column -->
 
