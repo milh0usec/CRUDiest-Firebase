@@ -218,6 +218,7 @@
 
     <hr />
 
+    <!-- Comments row -->
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
         <span ng-click="showComments = !showComments" class="showComments" data-toggle="tooltip" data-placement="top" title="Click to show or hide comments.">
@@ -240,7 +241,7 @@
           </div>
           <div class="col-sm-4 col-md-4 col-lg-4">
             <form ng-submit="deleteComment(movie, comment)">
-              <button type="submit" class="btn btn-warning btn-sm">Delete Comment</button>
+              <button type="submit" class="btn btn-danger btn-sm">Delete Comment</button>
             </form>
           </div>
         </div>

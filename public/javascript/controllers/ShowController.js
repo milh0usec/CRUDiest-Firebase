@@ -1,4 +1,4 @@
-app.controller('ShowController', ['$scope', '$routeParams', '$location', '$firebaseObject', '$firebaseAuth', '$timeout', function($scope, $routeParams, $location, $firebaseObject, $firebaseAuth, $timeout) {
+app.controller('ShowController', ['$scope', '$routeParams', '$location', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '$timeout', function($scope, $routeParams, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $timeout) {
   console.log("Show controller.");
 
   // Initialize variables
@@ -208,16 +208,29 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     });
   };
 
+  // JavaScript and Firebase version
   $scope.deleteComment = function(movie, comment) {
     var index = movie.movieComments.indexOf(comment); // find the index of the comment in the array of comments
-    $scope.movie.movieComments.splice(index, 1); // removes the comment from the array
-    $scope.movie.$save(movie).then(function() {
-      console.log("Comment deleted!");
+    $firebaseObject(ref.child($routeParams.id).child('movieComments').child(index)).$remove().then(function() {
+      console.log("Movie deleted.");
+      $location.path( "/movies" );
     }, function(error) {
-      console.log("Error, comment not deleted.");
+      console.log("Error, movie not deleted.");
       console.log(error);
     });
   };
+
+  // JavaScript version
+  // $scope.deleteComment = function(movie, comment) {
+  //   var index = movie.movieComments.indexOf(comment); // find the index of the comment in the array of comments
+  //   $scope.movie.movieComments.splice(index, 1); // removes the comment from the array
+  //   $scope.movie.$save(movie).then(function() { // save to Firebase
+  //     console.log("Comment deleted!");
+  //   }, function(error) {
+  //     console.log("Error, comment not deleted.");
+  //     console.log(error);
+  //   });
+  // };
 
   // Likes section
   $scope.upLike = function() {
