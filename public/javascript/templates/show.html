@@ -230,18 +230,18 @@
         </ng-pluralize><br />
       </span>
 
-      <div ng-hide="showComments" ng-repeat="comment in movie.movieComments">
+      <div ng-hide="showComments" ng-repeat="comment in comments">
         <div class="row comment img-rounded">
           <div class="col-sm-8 col-md-8 col-lg-8">
             <span class="commentText">{{comment.commentText}}</span>
             <div class="commentAuthor">
               <span>&#151;{{comment.commentAuthor}}, </span>
-              <span>{{comment.commentTimestamp | date:'mediumDate'}}</span>
+              <span>{{comment.commentDate | date:'mediumDate'}}</span>
             </div>
           </div>
           <div class="col-sm-4 col-md-4 col-lg-4">
-            <form ng-submit="deleteComment(movie, comment)">
-              <button type="submit" class="btn btn-danger btn-sm">Delete Comment</button>
+            <form>
+              <button ng-click="comments.$remove(comment)" class="btn btn-danger btn-sm">Delete Comment</button>
             </form>
           </div>
         </div>

@@ -1,6 +1,7 @@
 app.controller('ShowController', ['$scope', '$routeParams', '$location', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '$timeout', function($scope, $routeParams, $location, $firebaseObject, $firebaseArray, $firebaseAuth, $timeout) {
   console.log("Show controller.");
 
+
   // Initialize variables
   $scope.watch = {
     titleSave: false,
@@ -42,12 +43,11 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   // Set up single movie object
   $scope.movie = $firebaseObject(ref.child($routeParams.id));
-  console.log($scope.movie);
+  $scope.comments = $firebaseArray(ref.child($routeParams.id).child('movieComments'));
 
   // Set up auth
   $scope.authObj = $firebaseAuth(ref);
   var authData = $scope.authObj.$getAuth();
-  console.log(authData.uid);
 
   // Shows and hides Saved! message
   $scope.change = function(movie, prop) {
@@ -189,48 +189,21 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   // Comments section
   $scope.newComment = function(comment) { // full record is passed from the view
-    console.log(comment);
-    console.log($scope.movie.movieComments);
-    var commentObject = {
+    var commentWithDate = {
       commentText: comment.commentText,
       commentAuthor: comment.commentAuthor,
-      commentTimestamp: Date.now(),
+      commentDate: Date.now(),
     };
     $scope.movie.movieComments = $scope.movie.movieComments || [];
-    $scope.movie.movieComments.push(commentObject);
     $scope.comment.commentText = null; // needed to prevent autofilling fields
     $scope.comment.commentAuthor = null; // needed to prevent autofilling fields
-    $scope.movie.$save().then(function() {
+    $firebaseArray(ref.child($routeParams.id).child('movieComments')).$add(commentWithDate).then(function() {
       console.log("Comment added!");
     }, function(error) {
       console.log("Error, comment not added.");
       console.log(error);
     });
   };
-
-  // JavaScript and Firebase version
-  $scope.deleteComment = function(movie, comment) {
-    var index = movie.movieComments.indexOf(comment); // find the index of the comment in the array of comments
-    $firebaseObject(ref.child($routeParams.id).child('movieComments').child(index)).$remove().then(function() {
-      console.log("Movie deleted.");
-      $location.path( "/movies" );
-    }, function(error) {
-      console.log("Error, movie not deleted.");
-      console.log(error);
-    });
-  };
-
-  // JavaScript version
-  // $scope.deleteComment = function(movie, comment) {
-  //   var index = movie.movieComments.indexOf(comment); // find the index of the comment in the array of comments
-  //   $scope.movie.movieComments.splice(index, 1); // removes the comment from the array
-  //   $scope.movie.$save(movie).then(function() { // save to Firebase
-  //     console.log("Comment deleted!");
-  //   }, function(error) {
-  //     console.log("Error, comment not deleted.");
-  //     console.log(error);
-  //   });
-  // };
 
   // Likes section
   $scope.upLike = function() {

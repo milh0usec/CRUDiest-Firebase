@@ -7,10 +7,14 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
   var authData = $scope.authObj.$getAuth();
   $scope.authData = authData;
 
+
+
   $scope.movies = $firebaseArray(ref);
   $scope.order = '$id';
   $scope.reverse = true;
   $scope.loading = false;
+
+  console.log($scope.movies)
 
   $scope.getLocation = function(val) {
     return $http.get('//www.omdbapi.com/?s=' + val)
