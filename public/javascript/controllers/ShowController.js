@@ -43,6 +43,14 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   // Set up single movie object
   $scope.movie = $firebaseObject(ref.child($routeParams.id));
+
+  // obj = $firebaseObject(ref.child($routeParams.id));
+  //
+  // obj.$bindTo($scope, 'movie').then(function() {
+  //   console.log($scope.movie);
+  // });
+
+  // Set up comments array
   $scope.comments = $firebaseArray(ref.child($routeParams.id).child('movieComments'));
 
   // Set up auth
@@ -50,8 +58,8 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   var authData = $scope.authObj.$getAuth();
 
   // Shows and hides Saved! message
-  $scope.change = function(movie, prop) {
-    $scope.movie.$save(movie);
+  $scope.change = function(prop) {
+    $scope.movie.$save();
     $scope.watch[prop + 'Change'] = true; // Show message
     $timeout(function() {
       $scope.watch[prop + 'Change'] = false; // Hide message
@@ -60,7 +68,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   // It's not possible to make a single function for all the fields because $watch doesn't tell you which property changed.
   // Watch movie object title property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieTitle')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieTitle')).$watch(function() {
     $scope.watch.titleSave = true; // Show message
     $timeout(function() {
       $scope.watch.titleSave = false; // Hide message
@@ -68,7 +76,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object poster property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('moviePoster')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('moviePoster')).$watch(function() {
     $scope.watch.posterSave = true; // Show message
     $timeout(function() {
       $scope.watch.posterSave = false; // Hide message
@@ -76,7 +84,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object plot property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('moviePlot')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('moviePlot')).$watch(function() {
     $scope.watch.plotSave = true; // Show message
     $timeout(function() {
       $scope.watch.plotSave = false; // Hide message
@@ -84,7 +92,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object trivia property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieTrivia')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieTrivia')).$watch(function() {
     $scope.watch.triviaSave = true; // Show message
     $timeout(function() {
       $scope.watch.triviaSave = false; // Hide message
@@ -92,7 +100,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object director property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieDirector')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieDirector')).$watch(function() {
     $scope.watch.directorSave = true; // Show message
     $timeout(function() {
       $scope.watch.directorSave = false; // Hide message
@@ -100,7 +108,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object writer property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieWriter')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieWriter')).$watch(function() {
     $scope.watch.writerSave = true; // Show message
     $timeout(function() {
       $scope.watch.writerSave = false; // Hide message
@@ -108,7 +116,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object actors property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieActors')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieActors')).$watch(function() {
     $scope.watch.actorsSave = true; // Show message
     $timeout(function() {
       $scope.watch.actorsSave = false; // Hide message
@@ -116,7 +124,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object year property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieYear')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieYear')).$watch(function() {
     $scope.watch.yearSave = true; // Show message
     $timeout(function() {
       $scope.watch.yearSave = false; // Hide message
@@ -124,7 +132,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object country property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieCountry')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieCountry')).$watch(function() {
     $scope.watch.countrySave = true; // Show message
     $timeout(function() {
       $scope.watch.countrySave = false; // Hide message
@@ -132,7 +140,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object language property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieLanguage')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieLanguage')).$watch(function() {
     $scope.watch.languageSave = true; // Show message
     $timeout(function() {
       $scope.watch.languageSave = false; // Hide message
@@ -140,7 +148,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object genre property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieGenre')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieGenre')).$watch(function() {
     $scope.watch.genreSave = true; // Show message
     $timeout(function() {
       $scope.watch.genreSave = false; // Hide message
@@ -148,7 +156,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object rated property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieRated')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieRated')).$watch(function() {
     $scope.watch.ratedSave = true; // Show message
     $timeout(function() {
       $scope.watch.ratedSave = false; // Hide message
@@ -156,7 +164,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object awards property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieAwards')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieAwards')).$watch(function() {
     $scope.watch.awardsSave = true; // Show message
     $timeout(function() {
       $scope.watch.awardsSave = false; // Hide message
@@ -164,7 +172,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object IMDB rating property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieIMDBRating')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieIMDBRating')).$watch(function() {
     $scope.watch.imdbRatingSave = true; // Show message
     $timeout(function() {
       $scope.watch.imdbRatingSave = false; // Hide message
@@ -172,7 +180,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object IMDB votes property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieIMDBVotes')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieIMDBVotes')).$watch(function() {
     $scope.watch.imdbVotesSave = true; // Show message
     $timeout(function() {
       $scope.watch.imdbVotesSave = false; // Hide message
@@ -180,7 +188,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   });
 
   // Watch movie object metascore property, show "Saved!" message
-  $firebaseObject(ref.child($routeParams.id).child('movieMetascore')).$watch(function(event) {
+  $firebaseObject(ref.child($routeParams.id).child('movieMetascore')).$watch(function() {
     $scope.watch.metascoreSave = true; // Show message
     $timeout(function() {
       $scope.watch.metascoreSave = false; // Hide message
@@ -201,6 +209,16 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
       console.log("Comment added!");
     }, function(error) {
       console.log("Error, comment not added.");
+      console.log(error);
+    });
+  };
+
+  $scope.deleteComment = function(comment) {
+    // var commentIndex = $scope.comments.$indexFor(comment.$id);
+    $scope.comments.$remove(comment).then(function() {
+      console.log("Comment deleted!");
+    }, function(error) {
+      console.log("Error, comment not deleted.");
       console.log(error);
     });
   };
@@ -230,10 +248,10 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
 
   // Delete movie
   // This handler is for $firebaseObject
-  $scope.deleteMovie = function() { // DESTROY
-    $scope.movie.$remove().then(function() {
+  $scope.deleteMovie = function() {
+    $scope.movie.$remove().then(function() { // delete movie from array of movies
       console.log("Movie deleted.");
-      $location.path( "/movies" );
+      $location.path( "/movies" ); // return user to home page
     }, function(error) {
       console.log("Error, movie not deleted.");
       console.log(error);

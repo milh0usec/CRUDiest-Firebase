@@ -27,6 +27,7 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
 
   $scope.onSelect = function ($item) {
     $scope.loading = true;
+    $scope.movie.movieTitle = null; // needed to prevent previous query from autofilling search form
     console.log("Selected!");
     return $http.get('//www.omdbapi.com/?t=' + $item)
     .then(function(response){
