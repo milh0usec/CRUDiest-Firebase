@@ -7,8 +7,7 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
   var authData = $scope.authObj.$getAuth();
   $scope.authData = authData;
 
-
-
+  // Access all movies in array
   $scope.movies = $firebaseArray(ref);
   $scope.order = '$id';
   $scope.reverse = true;
@@ -53,10 +52,10 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
         movieImdbVotes: response.data.imdbVotes,
         movieDateAdded: Date.now()
       };
-      // reset orderBy so that new movie appears in upper left
-      $scope.order = '$id'
-      $scope.movies.$add(movie);
-      $scope.loading = false;
+      $scope.movies.$add(movie).then(function() {
+        $scope.order = '$id' // reset orderBy so that new movie appears in upper left
+        $scope.loading = false;
+      });
     });
   };
 

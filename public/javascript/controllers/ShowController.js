@@ -41,21 +41,14 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   // Connect to Firebase
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
 
-  // Set up single movie object
-  $scope.movie = $firebaseObject(ref.child($routeParams.id));
+  $scope.movies = $firebaseArray(ref); // Set up array of all movies
 
-  // obj = $firebaseObject(ref.child($routeParams.id));
-  //
-  // obj.$bindTo($scope, 'movie').then(function() {
-  //   console.log($scope.movie);
-  // });
+  $scope.movie = $firebaseObject(ref.child($routeParams.id)); // Set up single movie object
 
-  // Set up comments array
-  $scope.comments = $firebaseArray(ref.child($routeParams.id).child('movieComments'));
+  $scope.comments = $firebaseArray(ref.child($routeParams.id).child('movieComments')); // Set up comments array
 
-  // Set up auth
-  $scope.authObj = $firebaseAuth(ref);
-  var authData = $scope.authObj.$getAuth();
+  // $scope.authObj = $firebaseAuth(ref); // Set up auth
+  // var authData = $scope.authObj.$getAuth();
 
   // Shows and hides Saved! message
   $scope.change = function(prop) {
@@ -224,10 +217,10 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   };
 
   // Likes section
-  $scope.upLike = function() {
+  $scope.upLike = function(movie) {
     $scope.movie.movieLikes += 1;
-    $scope.movie.$save().then(function() { // use with $firebaseObject
-      // $scope.movies.$save(movie).then(function() { // use with $firebaseArray
+    // $scope.movie.$save().then(function() { // use with $firebaseObject
+    $scope.movies.$save(movie).then(function() { // use with $firebaseArray
       console.log("Upliked!");
     }, function(error) {
       console.log("Error, movie not upliked.");
@@ -249,7 +242,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
   // Delete movie
   // This handler is for $firebaseObject
   $scope.deleteMovie = function() {
-    $scope.movie.$remove().then(function() { // delete movie from array of movies
+    $scope.movie.$remove().then(function() { // delete movie object from array of movies
       console.log("Movie deleted.");
       $location.path( "/movies" ); // return user to home page
     }, function(error) {
