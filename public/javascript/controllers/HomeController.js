@@ -2,25 +2,30 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
   console.log("Home controller.");
   $scope.loading = true;
 
+  // Create Firebase reference
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+
+  // Set up Firebase auth
   $scope.authObj = $firebaseAuth(ref);
   var authData = $scope.authObj.$getAuth();
   $scope.authData = authData;
 
   // Access all movies in array
   $scope.movies = $firebaseArray(ref);
+
+  //Initialize variables
   $scope.order = '$id';
   $scope.reverse = true;
   $scope.loading = false;
 
-  console.log($scope.movies)
-
   $scope.getLocation = function(val) {
-    return $http.get('//www.omdbapi.com/?s=' + val)
-    .then(function(response){
-      return response.data.Search.map(function(item){
+    return $http.get('//www.omdbapi.com/?s=' + val) // send an HTTP request to the OMDb
+    .then(function(response){ // then execute a promise
+      return response.data.Search.map(function(item){ // when OMDb can't find a movie to match the search string an error is logged "TypeError: Cannot read property 'map' of undefined". This error can be ignored, when the OMDb finds a movie then no error is logged.
         return item.Title;
       });
+    }, function(error) {
+      console.log(error);
     });
   };
 

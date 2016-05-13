@@ -38,7 +38,7 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     metascoreChange: false
   };
 
-  // Connect to Firebase
+// Create Firebase reference
   var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
 
   $scope.movies = $firebaseArray(ref); // Set up array of all movies
