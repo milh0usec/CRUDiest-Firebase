@@ -14,7 +14,7 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
   $scope.movies = $firebaseArray(ref);
 
   //Initialize variables
-  $scope.order = '$id';
+  $scope.order = 'movieDateAdded';
   $scope.reverse = true;
   $scope.loading = false;
 
