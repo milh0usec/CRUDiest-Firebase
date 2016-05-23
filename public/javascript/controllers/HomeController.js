@@ -59,7 +59,7 @@ app.controller('HomeController', ['$scope', '$http', '$firebaseArray', '$firebas
         movieDateAdded: Date.now()
       };
       $scope.movies.$add(movie).then(function() {
-        $scope.order = '$id' // reset orderBy so that new movie appears in upper left
+        $scope.order = $scope.movie.movieDateAdded; // reset orderBy so that new movie appears in upper left
         $scope.loading = false;
       });
     });
