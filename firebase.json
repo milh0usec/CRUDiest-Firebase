@@ -1,5 +1,5 @@
 {
-  "firebase": "crudiest-firebase",
+  /*"firebase": "crudiest-firebase",*/
   "public": "public",
   "ignore": [
     "firebase.json",

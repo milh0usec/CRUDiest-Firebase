@@ -33,6 +33,19 @@
   <ng-view />
 </div>
 
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBO2jz7kPGplS756yverApJ307nJk8WeeE",
+    authDomain: "crudiest-firebase.firebaseapp.com",
+    databaseURL: "https://crudiest-firebase.firebaseio.com",
+    storageBucket: "",
+  };
+  firebase.initializeApp(config);
+</script>
+
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="javascript/routes/routes.js"></script>
 <script type="text/javascript" src="javascript/controllers/HomeController.js"></script>

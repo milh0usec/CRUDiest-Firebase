@@ -1,0 +1,8 @@
+{
+  "rules": {
+    // public read access
+    ".read": true,
+    // only logged-in users have write access
+    ".write": "auth.uid != null"
+  }
+}
