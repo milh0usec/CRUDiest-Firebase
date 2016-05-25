@@ -17,12 +17,20 @@ app.config(function($routeProvider) {
   .otherwise({ redirectTo: '/movies' });
 });
 
-app.run(function($rootScope, $location){
+app.run(function($rootScope, $location, $uibModal){
   $rootScope.$on('$routeChangeError', function(event, next, previous, error){
     // We can catch the error thrown when the $requireAuth promise is rejected
     // and redirect the user back to the home page
     if (error === "AUTH_REQUIRED"){
       $location.path('/');
+      console.log("Auth required.")
+      var modalInstance = $uibModal.open({ // Open a modal window to alert the user.
+        templateUrl: 'javascript/templates/notLoggedinModalContent.html',
+        size: 'sm'
+      });
+      modalInstance.result.then(function(){
+        console.log("Modal window open.");
+      });
     }
   })
 });
