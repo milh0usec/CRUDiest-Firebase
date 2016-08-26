@@ -1,7 +1,11 @@
 app.controller('AccountModalInstanceCtrl', ['$scope', '$uibModalInstance', '$firebaseAuth', function($scope, $uibModalInstance, $firebaseAuth) {
   console.log("AccountModalInstanceCtrl controller.");
 
-  var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+  // Create Firebase2 reference
+  // var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+  // Create Firebase3 reference
+  var ref = firebase.database().ref();
+
   $scope.authObj = $firebaseAuth(ref);
 
   var authData = $scope.authObj.$getAuth();
@@ -22,9 +26,9 @@ app.controller('AccountModalInstanceCtrl', ['$scope', '$uibModalInstance', '$fir
       if (error === null) {
         console.log("Email changed successfully");
         $scope.alerts = [{
-            type: 'success',
-            msg: 'E-mail changed successfully'
-          }];
+          type: 'success',
+          msg: 'E-mail changed successfully'
+        }];
         $scope.$apply(function() {
           console.log("Applied!");
         });
@@ -32,9 +36,9 @@ app.controller('AccountModalInstanceCtrl', ['$scope', '$uibModalInstance', '$fir
         console.log("Error changing email:", error);
         console.log(error)
         $scope.alerts = [{
-            type: 'danger',
-            msg: 'Incorect password'
-          }];
+          type: 'danger',
+          msg: 'Incorect password'
+        }];
         $scope.$apply(function() {
           console.log("Applied!");
         });
@@ -62,9 +66,9 @@ app.controller('AccountModalInstanceCtrl', ['$scope', '$uibModalInstance', '$fir
       } else {
         console.log("Error changing password:", error);
         $scope.alerts = [{
-            type: 'danger',
-            msg: error
-          }];
+          type: 'danger',
+          msg: error
+        }];
         $scope.$apply(function() {
           console.log("Applied!");
         });

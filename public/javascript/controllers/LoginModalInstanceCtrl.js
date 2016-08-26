@@ -1,8 +1,7 @@
 app.controller('LoginModalInstanceCtrl', ['$scope', '$uibModalInstance', '$firebaseAuth', function($scope, $uibModalInstance, $firebaseAuth) {
   console.log("LoginModalInstanceCtrl controller.");
 
-  var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
-  $scope.authObj = $firebaseAuth(ref);
+  $scope.authObj = $firebaseAuth();
 
   // Close modal window button
   $scope.cancel = function () {
@@ -12,28 +11,22 @@ app.controller('LoginModalInstanceCtrl', ['$scope', '$uibModalInstance', '$fireb
   // Create new user with e-mail & password
   $scope.user = {};
   $scope.newUser = function(user) {
-    console.log("New User!");
-    ref.createUser({
-      email: $scope.user.email,
-      password: $scope.user.password
-    }, function(error, userData) {
-      if (error) {
-        console.log("Error creating user:", error);
-        $scope.alerts = [{
-          type: 'danger',
-          msg: 'Error: The specified email address is already in use.'
-        }];
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-      } else {
-        console.log("Successfully created user account with uid:", userData.uid);
-        $scope.reset();
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-        $uibModalInstance.close();
-      }
+    console.log("Creating new User!");
+    email = $scope.user.email;
+    password = $scope.user.password;
+    $scope.authObj.$createUserWithEmailAndPassword(email, password)
+    .then(function(userData) {
+      console.log("User " + userData.uid + " created successfully!");
+      $uibModalInstance.close(userData);
+    }).catch(function(error) {
+      console.error("Create user failed: ", error)
+      $scope.alerts = [{
+        type: 'danger',
+        msg: 'Error: The specified email address is already in use.'
+      }];
+      $scope.$apply(function() {
+        console.log("Applied!");
+      });
     });
   };
 
@@ -49,31 +42,22 @@ app.controller('LoginModalInstanceCtrl', ['$scope', '$uibModalInstance', '$fireb
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
-
+  
   // Login user
   $scope.loginUser = function(user) {
-    console.log("Login user!");
-    ref.authWithPassword({
-      email: $scope.user.email,
-      password: $scope.user.password
-    }, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-        $scope.alerts.push({
-          type: 'danger',
-          msg: 'Error: The specified e-mail address or password is incorrect.'
-        });
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-      } else {
-        console.log("Authenticated successfully with payload:", authData);
-        $scope.reset();
-        $scope.$apply(function() {
-          console.log("Applied!");
-        });
-        $uibModalInstance.close(authData);
-      }
+    console.log("Logging in user!");
+    email = $scope.user.email;
+    password = $scope.user.password;
+    $scope.authObj.$signInWithEmailAndPassword(email, password)
+    .then(function(authData) {
+      console.log("Logged in as: ", authData.uid);
+      $uibModalInstance.close(authData);
+    }).catch(function(error) {
+      console.error("Authentication failed: ", error)
+      $scope.alerts.push({
+        type: 'danger',
+        msg: 'Error: The specified e-mail address or password is incorrect.'
+      });
     });
   };
 

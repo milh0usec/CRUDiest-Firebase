@@ -38,13 +38,16 @@ app.controller('ShowController', ['$scope', '$routeParams', '$location', '$fireb
     metascoreChange: false
   };
 
-// Create Firebase reference
-  var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+  // Create Firebase2 reference
+  // var ref = new Firebase("https://crudiest-firebase.firebaseio.com/");
+
+  // Create Firebase3 reference
+  var ref = firebase.database().ref();
 
   // $scope.movies = $firebaseArray(ref); // Set up array of all movies
 
   $scope.movie = $firebaseObject(ref.child($routeParams.id)); // Set up single movie object
-console.log($scope.movie);
+  console.log($scope.movie);
   $scope.comments = $firebaseArray(ref.child($routeParams.id).child('movieComments')); // Set up comments array
 
   // $scope.authObj = $firebaseAuth(ref); // Set up auth

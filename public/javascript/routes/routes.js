@@ -10,7 +10,7 @@ app.config(function($routeProvider) {
     controller: 'ShowController',
     resolve: {
       "currentAuth": ["Auth", function(Auth) {
-        return Auth.$requireAuth();
+        return Auth.$requireSignIn();
       }]
     }
   })
@@ -19,7 +19,7 @@ app.config(function($routeProvider) {
 
 app.run(function($rootScope, $location, $uibModal){
   $rootScope.$on('$routeChangeError', function(event, next, previous, error){
-    // We can catch the error thrown when the $requireAuth promise is rejected
+    // We can catch the error thrown when the $requireSignIn promise is rejected
     // and redirect the user back to the home page
     if (error === "AUTH_REQUIRED"){
       $location.path('/');

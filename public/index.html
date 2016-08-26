@@ -6,36 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Firebase CRUD app with AngularJS, Bootstrap, and asynchronous typeahead.">
   <title>CRUDiest Movies Firebase</title>
+    <link rel="stylesheet" href="css/style.css">
 
   <!-- AngularJS -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <!-- UI Bootstrap-->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.min.js"></script>
+  <!-- Firebase2 -->
+  <!-- <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script> -->
 
-  <!-- Firebase -->
-  <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-  <!-- AngularFire -->
-  <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-
-  <link rel="stylesheet" href="css/style.css">
-
-</head>
-<body>
-
-<div class="container">
-  <div class="row text-center">
-    <a ng-href="/#/movies"><h1>CRUDiest Movies Database</h1></a>
-  </div>
-  <ng-view />
-</div>
-
-
-<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-<script>
+  <!-- Firebase3 -->
+  <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+  <script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBO2jz7kPGplS756yverApJ307nJk8WeeE",
@@ -44,15 +26,37 @@
     storageBucket: "",
   };
   firebase.initializeApp(config);
-</script>
+  </script>
 
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="javascript/routes/routes.js"></script>
-<script type="text/javascript" src="javascript/controllers/HomeController.js"></script>
-<script type="text/javascript" src="javascript/controllers/ShowController.js"></script>
-<script type="text/javascript" src="javascript/controllers/LoginModalInstanceCtrl.js"></script>
-<script type="text/javascript" src="javascript/controllers/AccountModalInstanceCtrl.js"></script>
-<script type="text/javascript" src="javascript/services/authFactory.js"></script>
+  <!-- AngularFire1 -->
+  <!-- <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script> -->
+
+  <!-- AngularFire2 -->
+  <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- UI Bootstrap-->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.0.2/ui-bootstrap-tpls.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="row text-center">
+      <a ng-href="/#/movies"><h1>CRUDiest Movies Database</h1></a>
+    </div>
+    <ng-view />
+  </div>
+
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="javascript/routes/routes.js"></script>
+  <script type="text/javascript" src="javascript/controllers/HomeController.js"></script>
+  <script type="text/javascript" src="javascript/controllers/ShowController.js"></script>
+  <script type="text/javascript" src="javascript/controllers/LoginModalInstanceCtrl.js"></script>
+  <script type="text/javascript" src="javascript/controllers/AccountModalInstanceCtrl.js"></script>
+  <script type="text/javascript" src="javascript/services/authFactory.js"></script>
 
 </body>
 </html>
